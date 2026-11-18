@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nueva contraseña | Sammy Sports</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="CSS/sammy.css">
+</head>
+<body class="auth-page">
+<main class="card auth-card"><div class="auth-logo"><i class="bi bi-shield-check"></i></div><h1 class="h4 fw-bold text-center text-blue mb-1">SAMMY SPORTS</h1><p class="text-center text-secondary small mb-4">Crear nueva contraseña</p>
+  <div class="alert alert-primary small d-flex gap-2" role="status"><i class="bi bi-info-circle"></i><div>Código verificado para <strong>admin@sammysports.com</strong>. Ingresa tu nueva contraseña de acceso.</div></div>
+  <form action="inicioSesion.html">
+    <div class="mb-3"><label for="nueva" class="form-label small fw-semibold">Nueva contraseña</label><div class="input-group"><span class="input-group-text"><i class="bi bi-lock"></i></span><input id="nueva" name="nueva" type="password" class="form-control" placeholder="••••••••••" required><button class="btn btn-outline-secondary" type="button" data-toggle-pw aria-label="Mostrar u ocultar contraseña"><i class="bi bi-eye"></i></button></div></div>
+    <div class="mb-3"><label for="confirmar" class="form-label small fw-semibold">Confirmar contraseña</label><div class="input-group"><span class="input-group-text"><i class="bi bi-lock-fill"></i></span><input id="confirmar" name="confirmar" type="password" class="form-control" placeholder="••••••••••" required><button class="btn btn-outline-secondary" type="button" data-toggle-pw aria-label="Mostrar u ocultar contraseña"><i class="bi bi-eye"></i></button></div></div>
+    <p id="matchMsg" class="match-msg" aria-live="polite"></p>
+    <button class="btn btn-sammy w-100 py-2" type="submit">Actualizar contraseña</button>
+  </form>
+  <a href="inicioSesion.html" class="d-block text-center small text-decoration-none mt-3"><i class="bi bi-arrow-left me-1"></i>Cancelar y volver al inicio de sesión</a><p class="auth-note"><i class="bi bi-lock me-1"></i>Entorno seguro. Solo personal autorizado.</p></main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/sammy.js"></script>
+</body>
+</html>

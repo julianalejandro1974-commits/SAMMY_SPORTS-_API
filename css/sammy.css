@@ -1,0 +1,274 @@
+/* =========================================================
+   SAMMY SPORTS - Sistema de diseño compartido
+   Cargar DESPUÉS de bootstrap.min.css en todas las páginas
+   Paleta: azul, gris y blanco
+   ========================================================= */
+
+:root {
+    /* Azules */
+    --sammy-blue: #0645c5;
+    --sammy-blue-hover: #053aa5;
+    --sammy-blue-rgb: 6, 69, 197;
+    --sammy-navy: #0b1d3a;
+    --sammy-blue-soft: #eaf1fb;
+
+    /* Grises */
+    --sammy-gray-50: #f4f7fb;
+    --sammy-gray-200: #e5e7eb;
+    --sammy-gray-500: #6b7280;
+    --sammy-gray-700: #334155;
+
+    /* Blanco */
+    --sammy-white: #ffffff;
+
+    /* Sobrescribe variables de Bootstrap */
+    --bs-primary: var(--sammy-blue);
+    --bs-primary-rgb: var(--sammy-blue-rgb);
+    --bs-link-color: var(--sammy-blue);
+    --bs-link-hover-color: var(--sammy-blue-hover);
+    --bs-body-color: var(--sammy-gray-700);
+    --bs-body-bg: var(--sammy-gray-50);
+    --bs-border-color: var(--sammy-gray-200);
+    --bs-font-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    font-family: var(--bs-font-sans-serif);
+    background-color: var(--sammy-gray-50);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+    background-color: var(--sammy-white);
+    border-bottom: 1px solid var(--sammy-gray-200);
+}
+
+.navbar-brand {
+    color: var(--sammy-blue) !important;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+}
+
+.navbar .nav-link {
+    color: var(--sammy-gray-500);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: var(--sammy-blue);
+}
+
+.navbar .nav-link.active {
+    font-weight: 600;
+    box-shadow: inset 0 -2px 0 var(--sammy-blue);
+}
+
+/* ---------- Botones (reemplazan btn-navy, btn-cotizar,
+              btn-accent, btn-primary-custom, btn-submit) ---------- */
+.btn-sammy {
+    background-color: var(--sammy-blue);
+    border: 1px solid var(--sammy-blue);
+    color: var(--sammy-white);
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-sammy:hover,
+.btn-sammy:focus-visible {
+    background-color: var(--sammy-blue-hover);
+    border-color: var(--sammy-blue-hover);
+    color: var(--sammy-white);
+}
+
+.btn-sammy:active {
+    transform: translateY(1px);
+}
+
+.btn-sammy-outline {
+    background-color: transparent;
+    border: 1px solid var(--sammy-blue);
+    color: var(--sammy-blue);
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-sammy-outline:hover {
+    background-color: var(--sammy-blue);
+    color: var(--sammy-white);
+}
+
+/* ---------- Formularios ---------- */
+.form-control,
+.form-select {
+    background-color: var(--sammy-white);
+    border: 1px solid var(--sammy-gray-200);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--sammy-blue);
+    box-shadow: 0 0 0 0.2rem rgba(var(--sammy-blue-rgb), 0.15);
+}
+
+.form-check-input:checked {
+    background-color: var(--sammy-blue);
+    border-color: var(--sammy-blue);
+}
+
+/* ---------- Tarjetas ---------- */
+.card {
+    border: 1px solid var(--sammy-gray-200);
+    border-radius: 12px;
+    background-color: var(--sammy-white);
+}
+
+.card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.75rem 1.5rem rgba(var(--sammy-blue-rgb), 0.12);
+}
+
+.card-img-top {
+    object-fit: contain;
+    aspect-ratio: 4 / 3;
+    background-color: var(--sammy-gray-50);
+}
+
+/* ---------- Hero ---------- */
+.hero-section {
+    padding: 6rem 0;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.82), rgba(234, 241, 251, 0.9)),
+        url("../img/imagen-fondo.jpg") center / cover no-repeat;
+}
+
+.hero-banner {
+    background: linear-gradient(135deg, rgba(11, 29, 58, 0.9), rgba(6, 69, 197, 0.7));
+    min-height: 280px;
+}
+
+/* ---------- Precios, badges y textos ---------- */
+.text-navy { color: var(--sammy-navy); }
+.text-blue { color: var(--sammy-blue); }
+.bg-blue-soft { background-color: var(--sammy-blue-soft); }
+
+.badge-sammy {
+    background-color: var(--sammy-blue);
+    color: var(--sammy-white);
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* ---------- Footer ---------- */
+.footer-sammy {
+    background-color: var(--sammy-white);
+    border-top: 1px solid var(--sammy-gray-200);
+}
+
+.footer-sammy a {
+    color: var(--sammy-gray-500);
+    text-decoration: none;
+}
+
+.footer-sammy a:hover {
+    color: var(--sammy-blue);
+}
+
+/* ---------- Accesibilidad ---------- */
+:focus-visible {
+    outline: 3px solid rgba(var(--sammy-blue-rgb), 0.4);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+/* ---------- Componentes extra ---------- */
+.navbar .badge-cart { font-size: .65rem; }
+.page-title { color: var(--sammy-navy); font-weight: 800; letter-spacing: -.02em; }
+.price { color: var(--sammy-navy); font-weight: 700; }
+.x-small { font-size: .8rem; }
+
+.hero-banner { position: relative; overflow: hidden; border-radius: 16px; color: #fff; }
+.hero-banner > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.hero-banner::after { content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(100deg, rgba(11,29,58,.92), rgba(6,69,197,.55)); }
+.hero-banner .content { position: relative; z-index: 2; }
+
+.filter-box { background: #fff; border: 1px solid var(--sammy-gray-200); border-radius: 12px; padding: 1rem; }
+@media (min-width: 992px) { .filter-box { position: sticky; top: 88px; } }
+
+/* Cantidad */
+.qty { display: inline-flex; align-items: center; background: #fff; border: 1px solid var(--sammy-gray-200); border-radius: 8px; }
+.qty button { border: 0; background: transparent; width: 36px; height: 36px; color: var(--sammy-gray-500); font-size: 1.1rem; }
+.qty button:hover { color: var(--sammy-blue); }
+.qty .qty-val { min-width: 32px; text-align: center; font-weight: 600; }
+
+/* Detalle y carrito */
+.main-img { background: #fff; border: 1px solid var(--sammy-gray-200); border-radius: 12px; padding: 1.5rem; text-align: center; position: relative; }
+.main-img img { max-height: 460px; width: auto; max-width: 100%; object-fit: contain; }
+.thumb { width: 100%; aspect-ratio: 1; object-fit: cover; border: 2px solid transparent; border-radius: 8px; cursor: pointer; background: #fff; }
+.thumb.active, .thumb:hover { border-color: var(--sammy-blue); }
+.cart-item { background: #fff; border: 1px solid var(--sammy-gray-200); border-radius: 12px; padding: 1rem; }
+.cart-img { width: 96px; height: 96px; flex-shrink: 0; background: var(--sammy-gray-50); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.cart-img img { max-width: 90%; max-height: 90%; object-fit: contain; }
+.btn-remove { border: 0; background: none; color: var(--sammy-gray-500); font-size: 1.2rem; }
+.btn-remove:hover { color: #b42318; }
+
+/* Autenticación */
+.auth-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+    background: linear-gradient(135deg, var(--sammy-blue-soft), #fff 55%, var(--sammy-gray-50)); }
+.auth-card { width: 100%; max-width: 420px; padding: 2.25rem 2rem; box-shadow: 0 10px 40px rgba(var(--sammy-blue-rgb), .10); }
+.auth-logo { width: 56px; height: 56px; border-radius: 14px; background: var(--sammy-blue); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 1rem; }
+.auth-card .input-group-text { background: #fff; color: var(--sammy-gray-500); border-color: var(--sammy-gray-200); }
+.auth-note { font-size: .75rem; color: var(--sammy-gray-500); text-align: center; border-top: 1px solid var(--sammy-gray-200); padding-top: 1rem; margin: 1.5rem 0 0; }
+.codigo-inputs { display: grid; grid-template-columns: repeat(6, 1fr); gap: .5rem; }
+.codigo-input { text-align: center; font-weight: 700; font-size: 1.25rem; padding: .5rem 0; }
+.match-msg { font-size: .8rem; }
+
+/* ---------- Brillo y animación azul ---------- */
+@keyframes sammy-glow {
+    0%, 100% { box-shadow: 0 10px 40px rgba(var(--sammy-blue-rgb), .12), 0 0 0 1px rgba(var(--sammy-blue-rgb), .08); }
+    50%      { box-shadow: 0 12px 55px rgba(var(--sammy-blue-rgb), .30), 0 0 28px rgba(var(--sammy-blue-rgb), .28); }
+}
+.auth-card {
+    animation: sammy-glow 4s ease-in-out infinite;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.auth-card:hover {
+    animation: none;
+    transform: translateY(-3px);
+    box-shadow: 0 16px 60px rgba(var(--sammy-blue-rgb), .35), 0 0 34px rgba(var(--sammy-blue-rgb), .35);
+}
+
+.btn-sammy, .btn-sammy-outline {
+    box-shadow: 0 2px 8px rgba(var(--sammy-blue-rgb), .22);
+    transition: background-color .2s, color .2s, box-shadow .25s ease, transform .2s ease;
+}
+.btn-sammy:hover, .btn-sammy-outline:hover,
+.btn-sammy:focus-visible, .btn-sammy-outline:focus-visible {
+    box-shadow: 0 6px 22px rgba(var(--sammy-blue-rgb), .50), 0 0 14px rgba(var(--sammy-blue-rgb), .35);
+    transform: translateY(-1px);
+}
+.btn-sammy:active, .btn-sammy-outline:active { transform: translateY(1px); box-shadow: 0 2px 8px rgba(var(--sammy-blue-rgb), .3); }
+
+.auth-card .form-control:focus { box-shadow: 0 0 0 .2rem rgba(var(--sammy-blue-rgb), .18), 0 0 12px rgba(var(--sammy-blue-rgb), .20); }
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-card { animation: none; }
+    .btn-sammy:hover, .btn-sammy-outline:hover { transform: none; }
+}

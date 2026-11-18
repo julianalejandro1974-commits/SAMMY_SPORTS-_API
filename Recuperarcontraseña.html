@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recuperar contraseña | Sammy Sports</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="CSS/sammy.css">
+</head>
+<body class="auth-page">
+<main class="card auth-card"><div class="auth-logo"><i class="bi bi-shield-check"></i></div><h1 class="h4 fw-bold text-center text-blue mb-1">SAMMY SPORTS</h1><p class="text-center text-secondary small mb-4">Recuperación de contraseña</p>
+  <p class="small text-secondary">Ingresa el correo de tu cuenta administrativa. Te enviaremos un código de seguridad de 6 dígitos.</p>
+  <form action="#" method="get">
+    <div class="mb-3"><label for="correo" class="form-label small fw-semibold">Correo vinculado</label><div class="input-group"><span class="input-group-text"><i class="bi bi-envelope"></i></span><input id="correo" name="correo" type="email" class="form-control" placeholder="admin@sammysports.com" required></div></div>
+    <button class="btn btn-sammy w-100 py-2" type="submit">Enviar código</button>
+  </form>
+  <hr class="my-4">
+  <form action="cambiocontraseña.html">
+    <div class="d-flex justify-content-between small mb-2"><span class="fw-semibold">¿Ya recibiste tu código?</span><a href="#" class="text-decoration-none">Reenviar código</a></div>
+    <div class="codigo-inputs mb-2"><input class="form-control codigo-input" type="text" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="Dígito 1"><input class="form-control codigo-input" type="text" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="Dígito 2"><input class="form-control codigo-input" type="text" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="Dígito 3"><input class="form-control codigo-input" type="text" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="Dígito 4"><input class="form-control codigo-input" type="text" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="Dígito 5"><input class="form-control codigo-input" type="text" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="Dígito 6"></div>
+    <p class="small text-secondary">Revisa tu bandeja de entrada o la carpeta de correo no deseado.</p>
+    <button class="btn btn-sammy-outline w-100" type="submit">Verificar código</button>
+  </form>
+  <a href="inicioSesion.html" class="d-block text-center small text-decoration-none mt-3"><i class="bi bi-arrow-left me-1"></i>Volver al inicio de sesión</a><p class="auth-note"><i class="bi bi-lock me-1"></i>Entorno seguro. Solo personal autorizado.</p></main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/sammy.js"></script>
+</body>
+</html>
