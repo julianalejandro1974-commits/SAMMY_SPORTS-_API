@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sammy Sports - Resumen del Panel</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-profile">
+            <img src="../img/imagen-fondo.jpg" alt="Administrador">
+            <h6 class="fw-bold mb-0">Administrador</h6>
+            <small class="text-white-50" style="font-size: 0.72rem;">Sammy Sports Management</small>
+        </div>
+
+        <div class="sidebar-brand">
+            <h4 class="text-white">SAMMY<br>SPORTS</h4>
+            <small class="text-white-50" style="font-size: 0.72rem;">Panel Administrativo</small>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="panelControl.html" class="btn btn-sammy btn-lg px-4 sidebar-link active bi bi-grid-1x2">Panel de
+                Control</a>
+            </a>
+            <a href="#" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-archive">Inventario</a>
+            </a>
+            <a href="#" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-diagram-3">Catalogo</a>
+            </a>
+            <a href="#" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-receipt">Pedidos</a>
+            </a>
+            <a href="#" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-people">Personal</a>
+            </a>
+            <a href="#" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-cash-stack">Reportes</a>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="../index.html" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-gear">Configuracion</a>
+            </a>
+            <a href="../index.html" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-box-arrow-right">Configuracion</a>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <!-- Top Header -->
+        <header class="topbar">
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-outline-secondary d-lg-none" id="toggleSidebar">
+                    <i class="bi bi-list"></i>
+                </button>
+                <h1 class="topbar-title">Resumen del Panel</h1>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-link text-dark p-1 position-relative">
+                    <i class="bi bi-bell fs-5"></i>
+                </button>
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                    alt="Perfil" class="rounded-circle" width="34" height="34" style="object-fit: cover;">
+            </div>
+        </header>
+
+        <!-- Dashboard Body -->
+        <main class="container-fluid p-4">
+            <!-- Top Row: KPIs & Alerts -->
+            <div class="row g-4 mb-4">
+                <!-- KPI 1: Pedidos Activos -->
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="icon-circle">
+                                <i class="bi bi-truck"></i>
+                            </div>
+                            <span class="badge-period">Today</span>
+                        </div>
+                        <div class="metric-label">Pedidos Activos</div>
+                        <div class="metric-value">1,248</div>
+                        <div class="metric-trend">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <span>+12% vs last week</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 2: Balance Mensual -->
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="icon-circle">
+                                <i class="bi bi-wallet2"></i>
+                            </div>
+                            <span class="badge-period">October</span>
+                        </div>
+                        <div class="metric-label">Balance Mensual</div>
+                        <div class="metric-value">$84,520</div>
+                        <div class="metric-trend">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <span>+5.4% vs last month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts Column -->
+                <div class="col-12 col-xl-4 d-flex flex-column justify-content-between gap-3">
+                    <!-- Alert 1 -->
+                    <div class="alert-card-danger">
+                        <div>
+                            <div class="d-flex align-items-center gap-2 fw-bold text-danger-emphasis"
+                                style="font-size: 0.9rem;">
+                                <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+                                <span>Stock de Tela Bajo</span>
+                            </div>
+                            <div class="text-danger mt-1" style="font-size: 0.8rem;">Premium Mesh &lt; 50 yds</div>
+                        </div>
+                        <button class="btn-alert-red"
+                            onclick="alert('Redirigiendo a orden de compra...')">Reordenar</button>
+                    </div>
+
+                    <!-- Alert 2 -->
+                    <div class="alert-card-warning">
+                        <div>
+                            <div class="d-flex align-items-center gap-2 fw-bold"
+                                style="font-size: 0.9rem; color: #4a2311;">
+                                <i class="bi bi-clock-fill"></i>
+                                <span>Pedidos Retrasados</span>
+                            </div>
+                            <div class="mt-1" style="font-size: 0.8rem; color: #5d3a29;">14 orders past SLA</div>
+                        </div>
+                        <button class="btn-alert-brown"
+                            onclick="alert('Mostrando los 14 pedidos retrasados...')">Revisar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Row: Financial Performance Chart -->
+            <div class="dashboard-card mb-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                    <h5 class="fw-bold mb-0">Rendimiento Financiero</h5>
+                    <div class="d-flex gap-2" id="chartFilters">
+                        <button class="chart-filter-btn" data-period="semana">Semana</button>
+                        <button class="chart-filter-btn active" data-period="mes">Mes</button>
+                        <button class="chart-filter-btn" data-period="ano">Año</button>
+                    </div>
+                </div>
+
+                
+
+                <div class="bar-chart-wrapper">
+                    <div class="chart-grid-lines">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                    <div class="bars-container" id="barsContainer">
+                        <div class="bar-item" style="height: 45%; background-color: #c7d4f2;"></div>
+                        <div class="bar-item" style="height: 72%; background-color: #0044cc;"></div>
+                        <div class="bar-item" style="height: 55%; background-color: #93b0e8;"></div>
+                        <div class="bar-item" style="height: 92%; background-color: #d9480f;"></div>
+                    </div>
+
+                    <div class="bar-labels" id="barLabels">
+                        <div>Semana 1</div>
+                        <div class="text-center">Semana 2</div>
+                        <div class="text-center">Semana 3</div>
+                        <div class="text-end fw-bold" style="color: #9a3412;">Semana 4</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row: Recent Transactions Table -->
+            <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Transacciones Recientes</h5>
+                    <a href="#" class="text-decoration-none fw-bold"
+                        style="color: var(--accent-blue); font-size: 0.88rem;">Ver Todo</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-custom mb-0">
+                        <thead>
+                            <tr>
+                                <th>ID PEDIDO</th>
+                                <th>PRODUCTO</th>
+                                <th>ESTADO</th>
+                                <th class="text-end">MONTO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#" class="order-id">#ORD-9921</a></td>
+                                <td class="fw-medium">Pro Elite Tracksuit</td>
+                                <td><span class="status-badge status-procesando">Procesando</span></td>
+                                <td class="text-end fw-semibold">$145.00</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" class="order-id">#ORD-9920</a></td>
+                                <td class="fw-medium">Aero Sprint Spikes</td>
+                                <td><span class="status-badge status-enviado">Enviado</span></td>
+                                <td class="text-end fw-semibold">$120.00</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" class="order-id">#ORD-9919</a></td>
+                                <td class="fw-medium">Team Duffel Bag XL</td>
+                                <td><span class="status-badge status-entregado">Entregado</span></td>
+                                <td class="text-end fw-semibold">$85.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>
