@@ -1,30 +1,32 @@
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Sammy Sports - Gestión de Inventario</title>
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap e iconos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Iconos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Fuente -->
+    <!-- Fuente Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- CSS propio de Inventario -->
+    <!-- CSS propio del inventario -->
     <link rel="stylesheet" href="css/inventario.css">
 
-    <!-- JavaScript propio de Inventario -->
+    <!-- JavaScript propio del inventario -->
     <script src="js/inventario.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Botón del menú para celulares -->
+    <!-- Botón para abrir el menú en celulares -->
     <button class="menu-movil" id="abrirMenu" aria-label="Abrir menú">
         <i class="bi bi-list"></i>
     </button>
@@ -32,17 +34,20 @@
     <!-- Menú lateral -->
     <aside class="sidebar" id="sidebar">
 
+        <!-- Perfil del administrador -->
         <div class="sidebar-profile">
             <img src="../img/imagen-fondo.jpg" alt="Administrador">
             <h3>Administrador</h3>
             <small>Sammy Sports Management</small>
         </div>
 
+        <!-- Nombre de la empresa -->
         <div class="sidebar-brand">
             <h2>SAMMY<br>SPORTS</h2>
             <small>Panel Administrativo</small>
         </div>
 
+        <!-- Opciones del menú -->
         <nav class="sidebar-nav">
 
             <a href="panelControl.html">
@@ -50,7 +55,7 @@
                 Panel de Control
             </a>
 
-            <a href="Inventario.html" class="active">
+            <a href="Inventario.html" class="active" aria-current="page">
                 <i class="bi bi-archive"></i>
                 Inventario
             </a>
@@ -77,6 +82,7 @@
 
         </nav>
 
+        <!-- Opciones inferiores -->
         <div class="sidebar-footer">
 
             <a href="#" class="sin-destino">
@@ -84,18 +90,18 @@
                 Configuración
             </a>
 
-            <a href="../index.html">
+            <a href="#" class="sin-destino">
                 <i class="bi bi-box-arrow-right"></i>
                 Cerrar Sesión
             </a>
 
         </div>
-
     </aside>
 
     <!-- Contenido principal -->
     <main class="contenido">
 
+        <!-- Encabezado -->
         <header class="encabezado">
 
             <div>
@@ -103,14 +109,15 @@
                 <p>Gestiona materias primas, telas y suministros de producción.</p>
             </div>
 
+            <!-- Botones principales -->
             <div class="acciones">
 
-                <button id="exportar" class="btn-exportar">
+                <button type="button" id="exportar" class="btn-exportar">
                     <i class="bi bi-file-earmark-pdf-fill"></i>
                     Exportar Inventario a PDF
                 </button>
 
-                <button id="registrar" class="btn-registrar">
+                <button type="button" id="registrar" class="btn-registrar">
                     <i class="bi bi-plus-circle-fill"></i>
                     Registrar Nuevo Insumo
                 </button>
@@ -171,6 +178,7 @@
                         </tr>
                     </thead>
 
+                    <!-- JavaScript agrega los registros aquí -->
                     <tbody id="tablaInventario"></tbody>
 
                 </table>
@@ -180,15 +188,19 @@
             <!-- Paginación -->
             <footer class="pie-tabla">
 
-                <span id="contador"></span>
+                <span id="contador" aria-live="polite"></span>
 
-                <nav id="paginacion"></nav>
+                <nav
+                    id="paginacion"
+                    aria-label="Paginación del inventario">
+                </nav>
 
             </footer>
 
         </section>
 
-        <p id="mensaje" class="mensaje" role="status"></p>
+        <!-- Mensajes informativos -->
+        <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
 
     </main>
 
