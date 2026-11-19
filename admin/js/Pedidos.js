@@ -1,5 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
   const $ = s => document.querySelector(s);
+
+  // ===== Menú hamburguesa (celular y tablet) =====
+  const boton = $('#abrirMenu');
+  const sidebar = $('#sidebar');
+  if (boton && sidebar) {
+    const cambiar = abrir => {
+      sidebar.classList.toggle('ped-abierto', abrir);
+      document.body.classList.toggle('ped-menu-abierto', abrir);
+      boton.setAttribute('aria-expanded', abrir);
+    };
+    boton.setAttribute('aria-expanded', 'false');
+    boton.addEventListener('click', e => {
+      e.stopPropagation();
+      cambiar(!sidebar.classList.contains('ped-abierto'));
+    });
+    // Cerrar al tocar fuera del menú, al elegir una opción o con Escape
+    document.addEventListener('click', e => {
+      if (!sidebar.contains(e.target)) cambiar(false);
+    });
+    sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => cambiar(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') cambiar(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 991) cambiar(false); });
+  }
   const dinero = n => '$' + n.toLocaleString('en-US');
   const iniciales = n => n.split(' ').map(p => p[0]).join('').slice(0, 2);
 

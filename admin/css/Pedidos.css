@@ -74,3 +74,20 @@
 
 @media (max-width:1100px){.ped-grid{grid-template-columns:1fr}}
 @media (max-width:640px){.ped-fila{grid-template-columns:1fr}}
+
+/* Menú lateral abierto en celular/tablet (lo activa pedidos.js).
+   Usa !important para ganarle a cualquier regla que lo oculte en inventario.css */
+@media (max-width:991px){
+  .sidebar.ped-abierto{
+    transform:none!important;
+    left:0!important;
+    visibility:visible!important;
+    opacity:1!important;
+    display:flex!important;
+    flex-direction:column;
+    z-index:1050!important;
+  }
+  body.ped-menu-abierto::after{
+    content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1040;
+  }
+}
