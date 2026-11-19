@@ -1,7 +1,5 @@
 
-/* ==========================================
-   SAMMY SPORTS - GESTIÓN DE INVENTARIO
-   ========================================== */
+/* SAMMY SPORTS - INVENTARIO */
 
 /* Colores principales */
 :root {
@@ -12,7 +10,6 @@
     --texto: #142238;
 }
 
-/* Estilos generales */
 * {
     box-sizing: border-box;
 }
@@ -24,9 +21,7 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-/* ==========================================
-   MENÚ LATERAL
-   ========================================== */
+/* MENÚ LATERAL */
 
 .sidebar {
     width: 250px;
@@ -41,7 +36,6 @@ body {
     z-index: 1030;
 }
 
-/* Perfil del administrador */
 .sidebar-profile {
     text-align: center;
     padding: 1.75rem 1rem 1rem;
@@ -52,7 +46,7 @@ body {
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid #ffffff33;
     margin-bottom: 0.75rem;
 }
 
@@ -67,7 +61,6 @@ body {
     color: #a8b9d9;
 }
 
-/* Logo SAMMY SPORTS */
 .sidebar-brand {
     text-align: center;
     padding: 0.75rem 1rem 1.5rem;
@@ -86,7 +79,6 @@ body {
     color: #7f8aa0;
 }
 
-/* Opciones del menú */
 .sidebar-nav {
     padding: 0 1rem;
     flex-grow: 1;
@@ -103,7 +95,7 @@ body {
     font-size: 0.9rem;
     font-weight: 500;
     margin-bottom: 0.35rem;
-    transition: all 0.2s;
+    transition: 0.2s;
 }
 
 .sidebar a i {
@@ -116,29 +108,24 @@ body {
     color: white;
 }
 
-/* Opción seleccionada */
 .sidebar a.active {
     background: var(--naranja);
     color: white;
     font-weight: 600;
 }
 
-/* Parte inferior del menú */
 .sidebar-footer {
     padding: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid #ffffff14;
 }
 
-/* ==========================================
-   CONTENIDO PRINCIPAL
-   ========================================== */
+/* CONTENIDO PRINCIPAL */
 
 .contenido {
     margin-left: 250px;
     padding: 24px;
 }
 
-/* Encabezado */
 .encabezado {
     display: flex;
     justify-content: space-between;
@@ -159,9 +146,7 @@ h1 {
     line-height: 1.5;
 }
 
-/* ==========================================
-   BOTONES PRINCIPALES
-   ========================================== */
+/* BOTONES */
 
 .acciones {
     width: 266px;
@@ -173,8 +158,8 @@ h1 {
 .acciones button {
     min-height: 47px;
     padding: 9px 12px;
-    font-weight: 700;
     font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
 }
 
@@ -182,7 +167,6 @@ h1 {
     font-size: 18px;
 }
 
-/* Exportar PDF */
 .btn-exportar {
     color: var(--azul);
     background: transparent;
@@ -193,20 +177,17 @@ h1 {
     background: #e3ecfc;
 }
 
-/* Registrar insumo */
 .btn-registrar {
+    color: white;
     background: var(--naranja);
     border: 2px solid var(--naranja);
-    color: white;
 }
 
 .btn-registrar:hover {
     background: #b83d0c;
 }
 
-/* ==========================================
-   BUSCADOR Y FILTRO
-   ========================================== */
+/* BUSCADOR Y FILTROS */
 
 .filtros {
     display: grid;
@@ -227,7 +208,6 @@ h1 {
     margin-bottom: 5px;
 }
 
-/* Campo de búsqueda */
 .entrada-busqueda {
     position: relative;
 }
@@ -248,8 +228,8 @@ h1 {
     background: #f8f9ff;
     border: 1px solid #bdc6df;
     color: #172840;
-    font-size: 15px;
     font-family: 'Inter', sans-serif;
+    font-size: 15px;
 }
 
 .filtros input {
@@ -265,9 +245,7 @@ h1 {
     outline: 1px solid var(--azul);
 }
 
-/* ==========================================
-   TABLA DE INVENTARIO
-   ========================================== */
+/* TABLA DE INVENTARIO */
 
 .tabla-contenedor {
     background: white;
@@ -277,7 +255,6 @@ h1 {
     box-shadow: 0 1px 3px #0000000a;
 }
 
-/* Permite desplazamiento horizontal */
 .tabla-scroll {
     overflow-x: auto;
 }
@@ -288,7 +265,6 @@ table {
     min-width: 850px;
 }
 
-/* Encabezado de la tabla */
 thead {
     background: #e3ecfc;
 }
@@ -301,7 +277,6 @@ th {
     font-weight: 700;
 }
 
-/* Filas */
 td {
     padding: 16px 23px;
     border-top: 1px solid #eef0f4;
@@ -310,19 +285,16 @@ td {
     line-height: 1.55;
 }
 
-/* Código del insumo */
 td:first-child {
     font-family: monospace;
     color: #778096;
     font-size: 14px;
 }
 
-/* Nombre del insumo */
 td:nth-child(2) {
     font-weight: 600;
 }
 
-/* Cantidad del inventario */
 .stock-numero {
     font-weight: 700;
 }
@@ -332,14 +304,11 @@ td:nth-child(2) {
     font-size: 13px;
 }
 
-/* Stock bajo */
 .stock-critico {
     color: red;
 }
 
-/* ==========================================
-   ESTADOS DEL INVENTARIO
-   ========================================== */
+/* ESTADOS */
 
 .estado {
     display: inline-block;
@@ -349,21 +318,17 @@ td:nth-child(2) {
     white-space: nowrap;
 }
 
-/* Estado adecuado */
 .estado.adecuado {
     background: #dce8ff;
     color: #3d4656;
 }
 
-/* Estado crítico */
 .estado.critico {
     background: #ffdad8;
     color: #a40000;
 }
 
-/* ==========================================
-   PAGINACIÓN
-   ========================================== */
+/* PAGINACIÓN */
 
 .pie-tabla {
     min-height: 57px;
@@ -403,25 +368,19 @@ td:nth-child(2) {
     cursor: default;
 }
 
-/* Mensajes informativos */
 .mensaje {
     font-size: 13px;
     color: #5a6374;
     margin-top: 12px;
 }
 
-/* Botón del menú móvil */
 .menu-movil {
     display: none;
 }
 
-/* ==========================================
-   DISEÑO RESPONSIVO
-   ========================================== */
+/* DISEÑO RESPONSIVO */
 
-/* Tablets */
 @media (max-width: 1050px) {
-
     .encabezado {
         flex-wrap: wrap;
     }
@@ -431,9 +390,7 @@ td:nth-child(2) {
     }
 }
 
-/* Celulares */
 @media (max-width: 750px) {
-
     .sidebar {
         transform: translateX(-100%);
         transition: transform 0.2s;
@@ -481,3 +438,4 @@ td:nth-child(2) {
         flex-wrap: wrap;
     }
 }
+

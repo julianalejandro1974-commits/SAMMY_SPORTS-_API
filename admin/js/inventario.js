@@ -1,5 +1,6 @@
 
 
+
 // Datos de ejemplo del inventario
 const inventario = [
     {
@@ -45,7 +46,7 @@ const mensaje = document.getElementById("mensaje");
 let paginaActual = 1;
 const porPagina = 3;
 
-// Buscar insumos por nombre, código y estado
+// Buscar por nombre, código y estado
 function obtenerFiltrados() {
     const texto = busqueda.value.toLowerCase().trim();
 
@@ -56,9 +57,8 @@ function obtenerFiltrados() {
     );
 }
 
-// Mostrar los registros en la tabla
+// Mostrar inventario
 function mostrarInventario() {
-
     const datos = obtenerFiltrados();
     const totalPaginas = Math.max(1, Math.ceil(datos.length / porPagina));
 
@@ -108,7 +108,6 @@ function mostrarInventario() {
 
 // Crear botones de paginación
 function agregarBoton(texto, pagina, deshabilitado, activa = false) {
-
     const boton = document.createElement("button");
 
     boton.textContent = texto;
@@ -126,7 +125,7 @@ function agregarBoton(texto, pagina, deshabilitado, activa = false) {
     paginacion.appendChild(boton);
 }
 
-// Buscar mientras el usuario escribe
+// Buscar mientras se escribe
 busqueda.addEventListener("input", () => {
     paginaActual = 1;
     mostrarInventario();
@@ -138,7 +137,7 @@ estado.addEventListener("change", () => {
     mostrarInventario();
 });
 
-// Botones que desarrollaremos después
+// Funciones pendientes
 document.getElementById("registrar").addEventListener("click", () => {
     mensaje.textContent = "El registro de insumos se desarrollará en la siguiente etapa.";
 });
@@ -152,10 +151,10 @@ document.getElementById("abrirMenu").addEventListener("click", () => {
     document.getElementById("sidebar").classList.toggle("abierta");
 });
 
-// Evitar navegación en enlaces sin destino
+// Enlaces sin destino
 document.querySelectorAll(".sin-destino").forEach(enlace => {
     enlace.addEventListener("click", evento => evento.preventDefault());
 });
 
-// Cargar inventario al abrir la página
+// Cargar los registros
 mostrarInventario();
