@@ -1,0 +1,218 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sammy Sports - Gestión de Catálogo</title>
+
+    <!-- Bootstrap, iconos y fuente -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS y JS propios del catálogo -->
+    <link rel="stylesheet" href="css/catalogoAdmin.css">
+    <script src="js/catalogoAdmin.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Botón para celulares -->
+    <button id="abrirMenu" class="menu-movil" aria-label="Abrir menú">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <!-- Menú lateral -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-profile">
+            <img src="../img/imagen-fondo.jpg" alt="Administrador">
+            <h3>Administrador</h3>
+            <small>Sammy Sports Management</small>
+        </div>
+
+        <div class="sidebar-brand">
+            <h2>SAMMY<br>SPORTS</h2>
+            <small>Panel Administrativo</small>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="panelControl.html">
+                <i class="bi bi-grid-1x2"></i>
+                Panel de Control
+            </a>
+
+            <a href="Inventario.html">
+                <i class="bi bi-archive"></i>
+                Inventario
+            </a>
+
+            <a href="catalogoAdmin.html" class="active">
+                <i class="bi bi-diagram-3"></i>
+                Catálogo
+            </a>
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-receipt"></i>
+                Pedidos
+            </a>
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-people"></i>
+                Personal
+            </a>
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-cash-stack"></i>
+                Reportes
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="sin-destino">
+                <i class="bi bi-gear-fill"></i>
+                Configuración
+            </a>
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-box-arrow-right"></i>
+                Cerrar Sesión
+            </a>
+        </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="contenido">
+
+        <header class="encabezado">
+            <div>
+                <h1>Gestión de Catálogo</h1>
+                <p>Gestiona el inventario de uniformes, detalles y visibilidad.</p>
+            </div>
+
+            <button id="exportar" class="btn-exportar">
+                <i class="bi bi-download"></i>
+                Exportar CSV
+            </button>
+        </header>
+
+        <div class="catalogo-layout">
+
+            <!-- Formulario para agregar uniformes -->
+            <section class="formulario-card">
+                <h2>
+                    <i class="bi bi-pencil-square"></i>
+                    Agregar / Editar Uniforme
+                </h2>
+
+                <form id="formUniforme">
+
+                    <label for="imagenUniforme" class="subir-imagen">
+                        <i class="bi bi-camera"></i>
+                        <span>Haz clic para subir una imagen</span>
+                        <img id="vistaPrevia" alt="Vista previa" hidden>
+                    </label>
+
+                    <input type="file" id="imagenUniforme"
+                           accept="image/*" hidden>
+
+                    <label for="nombre">Nombre del Uniforme</label>
+                    <input type="text" id="nombre"
+                           placeholder="ej., Camiseta Elite Performance"
+                           required>
+
+                    <div class="form-fila">
+                        <div>
+                            <label for="categoria">Categoría</label>
+                            <select id="categoria" required>
+                                <option value="">Seleccionar</option>
+                                <option>Camisetas de Fútbol</option>
+                                <option>Kits de Baloncesto</option>
+                                <option>Ropa de Entrenamiento</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="precio">Precio ($)</label>
+                            <input type="number" id="precio"
+                                   min="0.01" step="0.01"
+                                   placeholder="0.00" required>
+                        </div>
+                    </div>
+
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" rows="4"
+                        placeholder="Ingresa material, ajuste y características clave..."></textarea>
+
+                    <label for="disponibilidad">Estado</label>
+                    <select id="disponibilidad">
+                        <option>En Stock</option>
+                        <option>Sin Stock</option>
+                    </select>
+
+                    <div class="form-botones">
+                        <button type="reset" class="btn-limpiar">
+                            Limpiar
+                        </button>
+
+                        <button type="submit" class="btn-guardar" id="guardar">
+                            Guardar Uniforme
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Tabla del catálogo -->
+            <section class="tabla-card">
+
+                <div class="tabla-herramientas">
+                    <div class="buscador">
+                        <i class="bi bi-search"></i>
+                        <input type="search" id="buscarCatalogo"
+                               placeholder="Buscar catálogo...">
+                    </div>
+
+                    <select id="filtroEstado" aria-label="Filtrar productos">
+                        <option value="todos">Todos</option>
+                        <option value="En Stock">En Stock</option>
+                        <option value="Sin Stock">Sin Stock</option>
+                    </select>
+                </div>
+
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>IMG</th>
+                                <th>DETALLES DEL ARTÍCULO</th>
+                                <th>PRECIO</th>
+                                <th>ESTADO</th>
+                                <th>ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaCatalogo"></tbody>
+                    </table>
+                </div>
+
+                <footer class="pie-tabla">
+                    <span id="contador"></span>
+
+                    <div class="paginacion">
+                        <button id="anterior" aria-label="Anterior">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <span id="paginaActual">1</span>
+                        <button id="siguiente" aria-label="Siguiente">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                </footer>
+            </section>
+        </div>
+
+        <p id="mensaje" role="status" aria-live="polite"></p>
+    </main>
+</body>
+</html>
