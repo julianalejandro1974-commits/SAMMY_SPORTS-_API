@@ -1,0 +1,441 @@
+
+/* SAMMY SPORTS - INVENTARIO */
+
+/* Colores principales */
+:root {
+    --azul-oscuro: #1c2c3f;
+    --naranja: #d9480f;
+    --azul: #0044cc;
+    --fondo: #f4f6f9;
+    --texto: #142238;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: 'Inter', sans-serif;
+}
+
+/* MENÚ LATERAL */
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--azul-oscuro);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    z-index: 1030;
+}
+
+.sidebar-profile {
+    text-align: center;
+    padding: 1.75rem 1rem 1rem;
+}
+
+.sidebar-profile img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff33;
+    margin-bottom: 0.75rem;
+}
+
+.sidebar-profile h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.sidebar-profile small {
+    font-size: 0.72rem;
+    color: #a8b9d9;
+}
+
+.sidebar-brand {
+    text-align: center;
+    padding: 0.75rem 1rem 1.5rem;
+}
+
+.sidebar-brand h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-brand small {
+    font-size: 0.72rem;
+    color: #7f8aa0;
+}
+
+.sidebar-nav {
+    padding: 0 1rem;
+    flex-grow: 1;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    color: #d1d5db;
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+    transition: 0.2s;
+}
+
+.sidebar a i {
+    font-size: 0.9rem;
+    width: 16px;
+}
+
+.sidebar a:hover {
+    background: #263a52;
+    color: white;
+}
+
+.sidebar a.active {
+    background: var(--naranja);
+    color: white;
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid #ffffff14;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+.contenido {
+    margin-left: 250px;
+    padding: 24px;
+}
+
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 22px;
+    margin-bottom: 38px;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 8px 0 3px;
+}
+
+.encabezado p {
+    color: #4c5366;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* BOTONES */
+
+.acciones {
+    width: 266px;
+    flex-shrink: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.acciones button {
+    min-height: 47px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.acciones i {
+    font-size: 18px;
+}
+
+.btn-exportar {
+    color: var(--azul);
+    background: transparent;
+    border: 2px solid var(--azul);
+}
+
+.btn-exportar:hover {
+    background: #e3ecfc;
+}
+
+.btn-registrar {
+    color: white;
+    background: var(--naranja);
+    border: 2px solid var(--naranja);
+}
+
+.btn-registrar:hover {
+    background: #b83d0c;
+}
+
+/* BUSCADOR Y FILTROS */
+
+.filtros {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 256px;
+    gap: 23px;
+    background: white;
+    border: 1px solid #e4e8f0;
+    border-radius: 9px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px #0000000a;
+}
+
+.filtros label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.entrada-busqueda {
+    position: relative;
+}
+
+.entrada-busqueda i {
+    position: absolute;
+    top: 50%;
+    left: 13px;
+    transform: translateY(-50%);
+    color: #778096;
+    font-size: 19px;
+}
+
+.filtros input,
+.filtros select {
+    width: 100%;
+    height: 49px;
+    background: #f8f9ff;
+    border: 1px solid #bdc6df;
+    color: #172840;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+}
+
+.filtros input {
+    padding: 0 12px 0 40px;
+}
+
+.filtros select {
+    padding: 0 12px;
+}
+
+.filtros input:focus,
+.filtros select:focus {
+    outline: 1px solid var(--azul);
+}
+
+/* TABLA DE INVENTARIO */
+
+.tabla-contenedor {
+    background: white;
+    border: 1px solid #e4e8f0;
+    border-radius: 9px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px #0000000a;
+}
+
+.tabla-scroll {
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 850px;
+}
+
+thead {
+    background: #e3ecfc;
+}
+
+th {
+    padding: 16px 23px;
+    text-align: left;
+    color: #444d61;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+td {
+    padding: 16px 23px;
+    border-top: 1px solid #eef0f4;
+    font-size: 15px;
+    vertical-align: middle;
+    line-height: 1.55;
+}
+
+td:first-child {
+    font-family: monospace;
+    color: #778096;
+    font-size: 14px;
+}
+
+td:nth-child(2) {
+    font-weight: 600;
+}
+
+.stock-numero {
+    font-weight: 700;
+}
+
+.stock-unidad {
+    color: #778096;
+    font-size: 13px;
+}
+
+.stock-critico {
+    color: red;
+}
+
+/* ESTADOS */
+
+.estado {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.estado.adecuado {
+    background: #dce8ff;
+    color: #3d4656;
+}
+
+.estado.critico {
+    background: #ffdad8;
+    color: #a40000;
+}
+
+/* PAGINACIÓN */
+
+.pie-tabla {
+    min-height: 57px;
+    padding: 12px 23px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid #eef0f4;
+    font-size: 12px;
+    color: #41495a;
+}
+
+#paginacion {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#paginacion button {
+    border: none;
+    background: transparent;
+    min-width: 32px;
+    height: 32px;
+    color: #263348;
+    cursor: pointer;
+}
+
+#paginacion button.activa {
+    background: var(--azul);
+    color: white;
+    border-radius: 4px;
+}
+
+#paginacion button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.mensaje {
+    font-size: 13px;
+    color: #5a6374;
+    margin-top: 12px;
+}
+
+.menu-movil {
+    display: none;
+}
+
+/* DISEÑO RESPONSIVO */
+
+@media (max-width: 1050px) {
+    .encabezado {
+        flex-wrap: wrap;
+    }
+
+    .filtros {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 750px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.2s;
+    }
+
+    .sidebar.abierta {
+        transform: translateX(0);
+    }
+
+    .menu-movil {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1040;
+        background: var(--azul-oscuro);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+    }
+
+    .contenido {
+        margin-left: 0;
+        padding: 60px 14px 20px;
+    }
+
+    .acciones {
+        width: 100%;
+    }
+
+    .encabezado {
+        margin-bottom: 24px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .filtros {
+        padding: 15px;
+    }
+
+    .pie-tabla {
+        flex-wrap: wrap;
+    }
+}
+
