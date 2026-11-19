@@ -1,0 +1,76 @@
+/* Pedidos y Cotizaciones — todas las clases llevan prefijo ped- para no chocar con inventario.css */
+.contenido{
+  --ped-linea:#e6e9f0; --ped-texto:#1b2333; --ped-suave:#5d6678;
+  --ped-azul:#0a35cf; --ped-azul-claro:#d7e4fb; --ped-azul-tinta:#34507f;
+  --ped-naranja:#b23200; --ped-rojo:#8a0000; --ped-rosa:#fcd5d5; --ped-rosa-tinta:#b3261e;
+}
+.ped-grid{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:16px;align-items:start;margin-top:24px}
+.ped-col{display:flex;flex-direction:column;gap:16px;min-width:0}
+
+.ped-panel{background:#fff;border:1px solid var(--ped-linea);border-radius:10px;padding:18px 16px;color:var(--ped-texto)}
+.ped-panel h2{font-size:17px;font-weight:700;margin:0 0 6px}
+.ped-panel h2.ped-h-sm{font-size:15px;margin:0}
+.ped-suave{color:var(--ped-suave);font-size:13px;margin:0}
+.ped-panel-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--ped-linea)}
+.ped-panel-head h2{margin:0}
+.ped-sin-borde{border:0}
+.ped-icono{border:0;background:none;color:var(--ped-suave);padding:2px 6px;font-size:15px}
+
+.ped-scroll{overflow-x:auto}
+.ped-tabla{width:100%;min-width:560px;border-collapse:collapse}
+.ped-tabla th{font-size:10px;font-weight:600;color:var(--ped-suave);text-align:left;padding:14px 8px 8px;background:none}
+.ped-tabla td{padding:12px 8px;border-top:1px solid var(--ped-linea);vertical-align:middle;font-size:13px}
+.ped-tabla tbody tr:first-child td{border-top:0}
+.ped-der{text-align:right!important}
+.ped-id{color:var(--ped-azul);font-weight:700;font-size:12px}
+.ped-cliente{font-weight:600}
+.ped-tabla small{display:block;font-size:10px;color:var(--ped-suave)}
+.ped-quien{display:flex;align-items:center;gap:6px;font-weight:500}
+.ped-quien i{width:20px;height:20px;border-radius:50%;background:var(--ped-azul-claro);color:var(--ped-azul-tinta);font-style:normal;font-size:8px;font-weight:600;display:grid;place-items:center}
+.ped-estado{display:inline-block;padding:4px 10px;border-radius:99px;font-size:10px;font-weight:600;white-space:nowrap}
+.ped-e-confeccion{background:var(--ped-azul-claro);color:var(--ped-azul)}
+.ped-e-listo{background:var(--ped-rosa);color:var(--ped-rosa-tinta)}
+.ped-e-entregado{background:#eceef3;color:#3b4457}
+.ped-saldo{text-align:right;font-weight:700}
+.ped-saldo .debe{color:var(--ped-rosa-tinta)}
+.ped-saldo .pagado{color:var(--ped-azul)}
+
+#formPedido{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.ped-fila{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ped-campo{display:flex;flex-direction:column;gap:6px}
+.ped-campo label{font-size:11px;font-weight:600;color:#2c364b}
+.ped-campo input,.ped-campo select,.ped-campo textarea{font:inherit;font-size:13px;padding:11px;border:1px solid var(--ped-linea);border-radius:8px;background:#f1f3f8;color:var(--ped-texto);width:100%}
+.ped-campo textarea{resize:vertical;min-height:68px}
+.ped-campo ::placeholder{color:#a6adbd}
+.ped-error{color:var(--ped-rosa-tinta);font-size:12px;margin:0}
+.ped-form-acciones{display:flex;justify-content:flex-end;gap:12px;margin-top:6px}
+
+.ped-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border:0;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}
+.ped-btn:hover{filter:brightness(.95)}
+.ped-btn-suave{background:var(--ped-azul-claro);color:var(--ped-azul-tinta)}
+.ped-btn-naranja{background:var(--ped-naranja);color:#fff}
+.ped-btn-rojo{background:var(--ped-rojo);color:#fff;width:100%;padding:14px}
+
+.ped-alerta{background:var(--ped-rosa);border:1px solid #f4b9b9;border-radius:10px;padding:20px 14px;text-align:center;color:var(--ped-rosa-tinta)}
+.ped-alerta>i{font-size:30px;color:var(--ped-rojo)}
+.ped-alerta h3{font-size:15px;font-weight:700;color:var(--ped-rojo);margin:4px 0 6px}
+.ped-alerta p{font-size:12px;margin:0 0 16px}
+
+.ped-enlace{color:var(--ped-azul);font-weight:700;font-size:12px;text-decoration:none}
+.ped-chips{display:flex;gap:6px;padding-bottom:14px;border-bottom:1px solid var(--ped-linea);overflow-x:auto}
+.ped-chip{padding:5px 10px;border:1px solid #cfd6e4;border-radius:99px;background:none;font-size:10px;white-space:nowrap;cursor:pointer}
+.ped-chip.activo{background:var(--ped-azul-claro);border-color:var(--ped-azul-claro);color:var(--ped-azul-tinta)}
+.ped-cotizaciones{list-style:none;margin:0;padding:14px 0 0;display:flex;flex-direction:column;gap:10px}
+.ped-cot{border:1px solid var(--ped-linea);border-radius:8px;padding:12px}
+.ped-cot-top{display:flex;justify-content:space-between;font-size:11px;color:var(--ped-suave)}
+.ped-cot-top b{color:var(--ped-texto)}
+.ped-cot p{font-size:13px;color:#3b4457;margin:6px 0 8px}
+.ped-cot-pie{display:flex;justify-content:space-between;align-items:center}
+.ped-etiqueta{font-size:8.5px;font-weight:700;padding:3px 7px;border-radius:4px;letter-spacing:.04em}
+.ped-t-borrador{background:#e3e8f2;color:#3b4457}
+.ped-t-enviado{background:var(--ped-rosa);color:var(--ped-rosa-tinta)}
+.ped-t-aceptado{background:var(--ped-azul-claro);color:var(--ped-azul)}
+.ped-vacio{font-size:12px;color:var(--ped-suave);text-align:center;padding:12px}
+
+@media (max-width:1100px){.ped-grid{grid-template-columns:1fr}}
+@media (max-width:640px){.ped-fila{grid-template-columns:1fr}}
