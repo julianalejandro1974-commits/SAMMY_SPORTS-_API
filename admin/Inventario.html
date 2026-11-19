@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sammy Sports - Gestión de Inventario</title>
+
+    <!-- Bootstrap e iconos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Fuente Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS propio del inventario -->
+    <link rel="stylesheet" href="css/inventario.css">
+
+    <!-- JavaScript propio del inventario -->
+    <script src="js/inventario.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Botón para abrir el menú en celulares -->
+    <button class="menu-movil" id="abrirMenu" aria-label="Abrir menú">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <!-- Menú lateral -->
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Perfil del administrador -->
+        <div class="sidebar-profile">
+            <img src="../img/imagen-fondo.jpg" alt="Administrador">
+            <h3>Administrador</h3>
+            <small>Sammy Sports Management</small>
+        </div>
+
+        <!-- Nombre de la empresa -->
+        <div class="sidebar-brand">
+            <h2>SAMMY<br>SPORTS</h2>
+            <small>Panel Administrativo</small>
+        </div>
+
+        <!-- Opciones del menú -->
+        <nav class="sidebar-nav">
+
+            <a href="panelControl.html">
+                <i class="bi bi-grid-1x2"></i>
+                Panel de Control
+            </a>
+
+            <a href="Inventario.html " class="active" aria-current="page">
+                <i class=" bi bi-archive"></i>
+                Inventario
+            </a>
+
+            <a href="catalogoAdmin.html">
+                <i class="bi bi-diagram-3"></i>
+                Catálogo
+            </a>
+
+
+            <a href="Pedidos.html">
+                <i class="bi bi-receipt"></i>
+                Pedidos
+            </a>
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-people"></i>
+                Personal
+            </a>
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-cash-stack"></i>
+                Reportes
+            </a>
+
+        </nav>
+
+        <!-- Opciones inferiores -->
+        <div class="sidebar-footer">
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-gear-fill"></i>
+                Configuración
+            </a>
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-box-arrow-right"></i>
+                Cerrar Sesión
+            </a>
+
+        </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="contenido">
+
+        <!-- Encabezado -->
+        <header class="encabezado">
+
+            <div>
+                <h1>Gestión de Inventario</h1>
+                <p>Gestiona materias primas, telas y suministros de producción.</p>
+            </div>
+
+            <!-- Botones principales -->
+            <div class="acciones">
+
+                <button type="button" id="exportar" class="btn-exportar">
+                    <i class="bi bi-file-earmark-pdf-fill"></i>
+                    Exportar Inventario a PDF
+                </button>
+
+                <button type="button" id="registrar" class="btn-registrar">
+                    <i class="bi bi-plus-circle-fill"></i>
+                    Registrar Nuevo Insumo
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- Buscador y filtro -->
+        <section class="filtros">
+
+            <div class="campo-busqueda">
+
+                <label for="busqueda">Buscar Insumo/Tela</label>
+
+                <div class="entrada-busqueda">
+                    <i class="bi bi-search"></i>
+
+                    <input type="search" id="busqueda" placeholder="Buscar por nombre o código...">
+                </div>
+
+            </div>
+
+            <div class="campo-estado">
+
+                <label for="estado">Filtro de Estado</label>
+
+                <select id="estado">
+                    <option value="todos">Todos los Niveles</option>
+                    <option value="Adecuado">Adecuado</option>
+                    <option value="Crítico">Crítico</option>
+                </select>
+
+            </div>
+
+        </section>
+
+        <!-- Tabla de inventario -->
+        <section class="tabla-contenedor">
+
+            <div class="tabla-scroll">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Insumo/Tela</th>
+                            <th>Categoría</th>
+                            <th>Stock Actual</th>
+                            <th>Costo Unitario</th>
+                            <th>Proveedor</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+
+                    <!-- JavaScript agrega los registros aquí -->
+                    <tbody id="tablaInventario"></tbody>
+
+                </table>
+
+            </div>
+
+            <!-- Paginación -->
+            <footer class="pie-tabla">
+
+                <span id="contador" aria-live="polite"></span>
+
+                <nav id="paginacion" aria-label="Paginación del inventario">
+                </nav>
+
+            </footer>
+
+        </section>
+
+        <!-- Mensajes informativos -->
+        <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+
+    </main>
+
+</body>
+
+</html>
