@@ -29,27 +29,18 @@
   <h1 class="page-title h2 mb-1">Tu cotización</h1>
   <p class="text-secondary mb-4">Revisa los artículos y déjanos tus datos para enviarte la cotización.</p>
   <div class="row g-4 g-lg-5">
-    <div class="col-lg-7"><div class="d-flex flex-column gap-3">
-      <div class="cart-item d-flex gap-3"><div class="cart-img"><img src="img/catalogo/jerseyLocal.avif" alt="Pro Elite Tech Jersey"></div>
-        <div class="flex-grow-1"><div class="d-flex justify-content-between"><h3 class="h6 fw-bold mb-1">Pro Elite Tech Jersey</h3><button class="btn-remove" data-remove aria-label="Eliminar Pro Elite Tech Jersey">&times;</button></div>
-        <p class="small text-secondary mb-3">Azul eléctrico</p>
-        <div class="d-flex flex-wrap align-items-center gap-3"><select class="form-select w-auto" aria-label="Talla"><option selected>Talla L</option><option>Talla M</option><option>Talla S</option><option>Talla XL</option></select>
-        <div class="qty"><button type="button" data-qty="-1" aria-label="Disminuir">−</button><span class="qty-val">1</span><button type="button" data-qty="1" aria-label="Aumentar">+</button></div></div></div></div>
-      <div class="cart-item d-flex gap-3"><div class="cart-img"><img src="img/catalogo/pantaloneta.webp" alt="Pantaloneta Essential"></div>
-        <div class="flex-grow-1"><div class="d-flex justify-content-between"><h3 class="h6 fw-bold mb-1">Pantaloneta Essential</h3><button class="btn-remove" data-remove aria-label="Eliminar Pantaloneta Essential">&times;</button></div>
-        <p class="small text-secondary mb-3">Negro pizarra</p>
-        <div class="d-flex flex-wrap align-items-center gap-3"><select class="form-select w-auto" aria-label="Talla"><option selected>Talla M</option><option>Talla S</option><option>Talla L</option><option>Talla XL</option></select>
-        <div class="qty"><button type="button" data-qty="-1" aria-label="Disminuir">−</button><span class="qty-val">2</span><button type="button" data-qty="1" aria-label="Aumentar">+</button></div></div></div></div>
-    </div></div>
+    <div class="col-lg-7"><div class="d-flex flex-column gap-3" id="lista-cotizacion">
+      </div>
+      <div id="cotizacion-vacia" class="text-center py-5 d-none"><p class="text-secondary mb-3">Tu cotización está vacía.</p><a href="catalogo.html" class="btn btn-sammy">Ver catálogo</a></div></div>
     <div class="col-lg-5"><div class="card p-4 shadow-sm">
       <h2 class="h5 fw-bold mb-4">Información de contacto</h2>
-      <form>
-        <div class="mb-3"><label for="n" class="form-label small fw-semibold">Nombre</label><input id="n" class="form-control" placeholder="Ej: Ana García" required></div>
+      <form id="form-cotizacion" novalidate>
+        <div class="mb-3"><label for="n" class="form-label small fw-semibold">Nombre</label><input id="n" class="form-control" placeholder="Ej: Ana García" autocomplete="name" required><div class="invalid-feedback">Escribe tu nombre.</div></div>
         <div class="mb-3"><label for="w" class="form-label small fw-semibold">WhatsApp</label>
-          <div class="input-group"><span class="input-group-text"><i class="bi bi-whatsapp"></i></span><input id="w" type="tel" class="form-control" placeholder="+57 300 000 0000" required></div></div>
+          <div class="input-group has-validation"><span class="input-group-text"><i class="bi bi-whatsapp"></i></span><input id="w" type="tel" class="form-control" placeholder="+57 300 000 0000" autocomplete="tel" required><div class="invalid-feedback">Escribe un número válido (10 dígitos, con o sin +57).</div></div></div>
         <div class="mb-3"><label for="nt" class="form-label small fw-semibold">Notas adicionales</label><textarea id="nt" class="form-control" rows="3" placeholder="Colores del equipo, tallas especiales..."></textarea></div>
-        <div class="form-check mb-4"><input class="form-check-input" type="checkbox" id="terms" required><label class="form-check-label small text-secondary" for="terms">Acepto la política de privacidad y ser contactado por WhatsApp.</label></div>
-        <button type="submit" class="btn btn-sammy w-100 py-2"><i class="bi bi-send me-2"></i>Enviar cotización</button>
+        <div class="form-check mb-4"><input class="form-check-input" type="checkbox" id="terms" required><label class="form-check-label small text-secondary" for="terms">Acepto la política de privacidad y ser contactado por WhatsApp.</label><div class="invalid-feedback">Debes aceptar para poder enviar la cotización.</div></div>
+        <button type="submit" id="btn-enviar" class="btn btn-sammy w-100 py-2"><i class="bi bi-send me-2"></i>Enviar cotización</button>
       </form>
     </div></div>
   </div>
@@ -66,6 +57,7 @@
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/sammy.js"></script>
+<script src="js/cotizacion.js"></script>
+<script src="js/cotizacion.js"></script>
 </body>
 </html>
