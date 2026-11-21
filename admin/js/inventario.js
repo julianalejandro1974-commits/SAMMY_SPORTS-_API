@@ -1,8 +1,5 @@
-
-
-
-// Datos de ejemplo del inventario
-const inventario = [
+// Datos base del inventario (respaldo si localStorage está vacío)
+const inventarioInicial = [
     {
         codigo: "FAB-001",
         nombre: "Malla de Rendimiento - Azul",
@@ -35,6 +32,50 @@ const inventario = [
     }
 ];
 
+const CLAVE_INSUMOS = "sammy_sports_insumos";
+const URL_REGISTRO = "registrosNuevosInsumos.html";
+
+function escaparHTML(texto) {
+    const div = document.createElement("div");
+    div.textContent = String(texto ?? "");
+    return div.innerHTML;
+}
+
+function obtenerInsumosRegistrados() {
+    try {
+        const guardados = JSON.parse(localStorage.getItem(CLAVE_INSUMOS));
+        if (!Array.isArray(guardados)) return [];
+
+        return guardados.map((item, idx) => {
+            const cantidad = Number(item.stock ?? item.cantidad ?? 0);
+            const alerta = item.alertaMinima !== null && item.alertaMinima !== undefined
+                ? Number(item.alertaMinima)
+                : null;
+
+            const esCritico =
+                item.estado === "Crítico" ||
+                (alerta !== null && !Number.isNaN(alerta) && cantidad < alerta);
+
+            return {
+                codigo: item.sku || item.codigo || `INS-${String(idx + 1).padStart(3, "0")}`,
+                nombre: item.nombre || "Insumo sin nombre",
+                categoria: item.categoria || "General",
+                cantidad: Number.isNaN(cantidad) ? 0 : cantidad,
+                unidad: item.unidad || "Unidades",
+                costo: Number(item.costo ?? 0),
+                proveedor: item.proveedor || "Por asignar",
+                estado: esCritico ? "Crítico" : "Adecuado"
+            };
+        });
+    } catch (error) {
+        console.error("Error al leer insumos desde localStorage:", error);
+        return [];
+    }
+}
+
+const guardados = obtenerInsumosRegistrados();
+const inventario = guardados.length > 0 ? guardados : inventarioInicial;
+
 // Elementos del HTML
 const busqueda = document.getElementById("busqueda");
 const estado = document.getElementById("estado");
@@ -42,11 +83,12 @@ const tabla = document.getElementById("tablaInventario");
 const contador = document.getElementById("contador");
 const paginacion = document.getElementById("paginacion");
 const mensaje = document.getElementById("mensaje");
+const abrirMenuBtn = document.getElementById("abrirMenu");
+const sidebar = document.getElementById("sidebar");
 
 let paginaActual = 1;
 const porPagina = 3;
 
-// Buscar por nombre, código y estado
 function obtenerFiltrados() {
     const texto = busqueda.value.toLowerCase().trim();
 
@@ -57,7 +99,6 @@ function obtenerFiltrados() {
     );
 }
 
-// Mostrar inventario
 function mostrarInventario() {
     const datos = obtenerFiltrados();
     const totalPaginas = Math.max(1, Math.ceil(datos.length / porPagina));
@@ -69,32 +110,30 @@ function mostrarInventario() {
 
     tabla.innerHTML = visibles.map(item => `
         <tr>
-            <td>${item.codigo}</td>
-            <td>${item.nombre}</td>
-            <td>${item.categoria}</td>
+            <td>${escaparHTML(item.codigo)}</td>
+            <td>${escaparHTML(item.nombre)}</td>
+            <td>${escaparHTML(item.categoria)}</td>
             <td>
                 <span class="stock-numero ${item.estado === "Crítico" ? "stock-critico" : ""}">
-                    ${item.cantidad.toLocaleString("en-US")}
+                    ${Number(item.cantidad).toLocaleString("en-US")}
                 </span>
                 <span class="stock-unidad ${item.estado === "Crítico" ? "stock-critico" : ""}">
-                    ${item.unidad}
+                    ${escaparHTML(item.unidad)}
                 </span>
             </td>
-            <td>$${item.costo.toFixed(2)}</td>
-            <td>${item.proveedor}</td>
+            <td>$${Number(item.costo).toFixed(2)}</td>
+            <td>${escaparHTML(item.proveedor)}</td>
             <td>
                 <span class="estado ${item.estado === "Crítico" ? "critico" : "adecuado"}">
-                    ${item.estado}
+                    ${escaparHTML(item.estado)}
                 </span>
             </td>
         </tr>
     `).join("") || '<tr><td colspan="7">No se encontraron insumos.</td></tr>';
 
-    // Actualizar contador
     contador.textContent =
         `Mostrando ${datos.length ? inicio + 1 : 0} a ${Math.min(inicio + porPagina, datos.length)} de ${datos.length} entradas`;
 
-    // Crear paginación
     paginacion.innerHTML = "";
 
     agregarBoton("‹", paginaActual - 1, paginaActual === 1);
@@ -106,7 +145,6 @@ function mostrarInventario() {
     agregarBoton("›", paginaActual + 1, paginaActual === totalPaginas);
 }
 
-// Crear botones de paginación
 function agregarBoton(texto, pagina, deshabilitado, activa = false) {
     const boton = document.createElement("button");
 
@@ -125,36 +163,51 @@ function agregarBoton(texto, pagina, deshabilitado, activa = false) {
     paginacion.appendChild(boton);
 }
 
-// Buscar mientras se escribe
 busqueda.addEventListener("input", () => {
     paginaActual = 1;
     mostrarInventario();
 });
 
-// Filtrar por estado
 estado.addEventListener("change", () => {
     paginaActual = 1;
     mostrarInventario();
 });
 
-// Funciones pendientes
 document.getElementById("registrar").addEventListener("click", () => {
-    mensaje.textContent = "El registro de insumos se desarrollará en la siguiente etapa.";
+    window.location.href = URL_REGISTRO;
 });
 
 document.getElementById("exportar").addEventListener("click", () => {
     mensaje.textContent = "La exportación a PDF se implementará en la siguiente etapa.";
 });
 
-// Abrir menú en celulares
-document.getElementById("abrirMenu").addEventListener("click", () => {
-    document.getElementById("sidebar").classList.toggle("abierta");
-});
+if (abrirMenuBtn && sidebar) {
+    abrirMenuBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("abierta");
+    });
 
-// Enlaces sin destino
+    sidebar.querySelectorAll("a").forEach(enlace => {
+        enlace.addEventListener("click", () => {
+            if (window.innerWidth <= 750) {
+                sidebar.classList.remove("abierta");
+            }
+        });
+    });
+
+    document.addEventListener("click", evento => {
+        if (
+            window.innerWidth <= 750 &&
+            sidebar.classList.contains("abierta") &&
+            !sidebar.contains(evento.target) &&
+            !abrirMenuBtn.contains(evento.target)
+        ) {
+            sidebar.classList.remove("abierta");
+        }
+    });
+}
+
 document.querySelectorAll(".sin-destino").forEach(enlace => {
     enlace.addEventListener("click", evento => evento.preventDefault());
 });
 
-// Cargar los registros
 mostrarInventario();
