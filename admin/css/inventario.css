@@ -1,6 +1,4 @@
 
-/* SAMMY SPORTS - INVENTARIO */
-
 /* Colores principales */
 :root {
     --azul-oscuro: #1c2c3f;
@@ -438,4 +436,3 @@ td:nth-child(2) {
         flex-wrap: wrap;
     }
 }
-

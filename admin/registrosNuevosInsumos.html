@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrar Nuevo Insumo - Sammy Sports</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/registroNuevosInsumos.css" />
+</head>
+<body>
+  <!-- Botón hamburguesa para pantallas pequeñas -->
+  <button type="button" class="menu-movil" id="abrirMenu" aria-label="Abrir menú" aria-expanded="false">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <!-- Perfil del administrador -->
+    <div class="sidebar-profile">
+      <img src="../img/imagen-fondo.jpg" alt="Administrador" />
+      <h3>Administrador</h3>
+      <small>Sammy Sports Management</small>
+    </div>
+
+    <!-- Nombre de la empresa -->
+    <div class="sidebar-brand">
+      <h2>SAMMY<br />SPORTS</h2>
+      <small>Panel Administrativo</small>
+    </div>
+
+    <!-- Opciones del menú -->
+    <nav class="sidebar-nav">
+      <a href="panelControl.html">
+        <i class="bi bi-grid-1x2"></i>
+        Panel de Control
+      </a>
+
+      <a href="Inventario.html" class="active" aria-current="page">
+        <i class="bi bi-archive"></i>
+        Inventario
+      </a>
+
+      <a href="catalogoAdmin.html">
+        <i class="bi bi-diagram-3"></i>
+        Catálogo
+      </a>
+
+      <a href="Pedidos.html">
+        <i class="bi bi-receipt"></i>
+        Pedidos
+      </a>
+
+      <a href="#" class="sin-destino">
+        <i class="bi bi-people"></i>
+        Personal
+      </a>
+
+      <a href="#" class="sin-destino">
+        <i class="bi bi-cash-stack"></i>
+        Reportes
+      </a>
+    </nav>
+
+    <!-- Opciones inferiores -->
+    <div class="sidebar-footer">
+      <a href="configuracionAdmin.html">
+        <i class="bi bi-gear-fill"></i>
+        Configuración
+      </a>
+
+      <a href="../index.html">
+        <i class="bi bi-box-arrow-right"></i>
+        Cerrar Sesión
+      </a>
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="main">
+    <div class="breadcrumb">
+      Dashboard &gt; Inventario &gt; <strong>Añadir nuevo insumo</strong>
+    </div>
+
+    <div class="page-header-row">
+      <div>
+        <h1 class="page-title">Registrar Nuevo Insumo</h1>
+        <p class="page-subtitle">Añada un nuevo material o suministro al inventario central.</p>
+      </div>
+
+      <a href="Inventario.html" class="btn-volver">
+        <i class="bi bi-arrow-left"></i>
+        Volver a Inventario
+      </a>
+    </div>
+
+    <!-- Notificación dinámica -->
+    <div id="mensajeEstado" class="toast oculto" role="alert"></div>
+
+    <form class="card" id="formInsumo" novalidate>
+      <h2 class="section-title">Información Básica</h2>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="nombre">Nombre del Insumo</label>
+          <input id="nombre" name="nombre" type="text" placeholder="Ej. Malla de Rendimiento" required />
+        </div>
+
+        <div class="form-group">
+          <label for="sku">SKU / Código <span class="hint-inline">(Auto-generado)</span></label>
+          <input id="sku" name="sku" type="text" readonly />
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" name="categoria" required>
+            <option value="">Seleccione una categoría</option>
+            <option value="Tela">Tela</option>
+            <option value="Hilo">Hilo</option>
+            <option value="Herrajes">Herrajes</option>
+            <option value="Estampación">Estampación</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="proveedor">Proveedor <span class="hint-inline">(Opcional)</span></label>
+          <input id="proveedor" name="proveedor" type="text" placeholder="Ej. Apex Textiles" />
+        </div>
+      </div>
+
+      <h2 class="section-title">Detalles de Inventario</h2>
+
+      <div class="grid-3">
+        <div class="form-group">
+          <label for="stock">Stock Inicial</label>
+          <input id="stock" name="stock" type="number" min="0" step="any" value="0" required />
+        </div>
+
+        <div class="form-group">
+          <label for="unidad">Unidad de Medida</label>
+          <select id="unidad" name="unidad">
+            <option value="Yardas">Yardas</option>
+            <option value="Metros">Metros</option>
+            <option value="Bobinas">Bobinas</option>
+            <option value="Unidades">Unidades</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="costo">Costo Unitario ($)</label>
+          <input id="costo" name="costo" type="number" min="0" step="0.01" placeholder="0.00" required />
+        </div>
+      </div>
+
+      <div class="alert-box">
+        <div>
+          <label for="alerta">Nivel Mínimo para Alerta</label>
+          <p>Notificarme cuando el stock esté por debajo de esta cantidad.</p>
+        </div>
+        <input id="alerta" name="alerta" type="number" min="0" step="any" placeholder="Ej. 50" />
+      </div>
+
+      <div class="actions">
+        <button type="button" id="btnLimpiar" class="btn-secondary">Limpiar</button>
+        <button type="submit" class="btn-primary">Registrar Insumo</button>
+      </div>
+    </form>
+
+    <!-- Vista previa de registros guardados -->
+    <section class="tabla-contenedor">
+      <div class="tabla-top">
+        <h2 class="section-title no-border">Insumos en Inventario (<span id="contadorInsumos">0</span>)</h2>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Insumo/Tela</th>
+              <th>Categoría</th>
+              <th>Proveedor</th>
+              <th>Stock Actual</th>
+              <th>Costo Unitario</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tablaInsumos">
+            <tr>
+              <td colspan="8" class="empty-row">Aún no hay insumos registrados.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="pie-tabla">
+        <span id="resumenTabla">Mostrando 0 entradas</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="js/registroNuevosInsumos.js"></script>
+</body>
+</html>
