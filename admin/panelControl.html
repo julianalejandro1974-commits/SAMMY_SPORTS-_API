@@ -11,72 +11,104 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/PanelControl.css">
+    <link rel="stylesheet" href="../admin/css/PanelControl.css">
 </head>
 
 <body>
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
+
+        <!-- Perfil del administrador -->
         <div class="sidebar-profile">
             <img src="../img/imagen-fondo.jpg" alt="Administrador">
-            <h6 class="fw-bold mb-0">Administrador</h6>
-            <small class="text-white-50" style="font-size: 0.72rem;">Sammy Sports Management</small>
+            <h3>Administrador</h3>
+            <small>Sammy Sports Management</small>
         </div>
 
+        <!-- Nombre de la empresa -->
         <div class="sidebar-brand">
-            <h4 class="text-white">SAMMY<br>SPORTS</h4>
-            <small class="text-white-50" style="font-size: 0.72rem;">Panel Administrativo</small>
+            <h2>SAMMY<br>SPORTS</h2>
+            <small>Panel Administrativo</small>
         </div>
 
+        <!-- Opciones del menú -->
         <nav class="sidebar-nav">
-            <a href="panelControl.html" class="btn btn-sammy btn-lg px-4 sidebar-link active bi bi-grid-1x2">Panel de
-                Control</a>
+
+            <a href="panelControl.html" class="active" aria-current="page">
+                <i class="bi bi-grid-1x2"></i>
+                Panel de Control
             </a>
-            <a href="Inventario.html" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-archive">Inventario</a>
+
+            <a href="Inventario.html">
+                <i class="bi bi-archive"></i>
+                Inventario
             </a>
-            <a href="catalogoAdmin.html" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-diagram-3">Catálogo</a>
-            <a href="Pedidos.html" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-receipt">Pedidos</a>
+
+            <a href="catalogoAdmin.html">
+                <i class="bi bi-diagram-3"></i>
+                Catálogo
             </a>
-            <a href="#" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-people">Personal</a>
+
+            <a href="Pedidos.html">
+                <i class="bi bi-receipt"></i>
+                Pedidos
             </a>
-            <a href="#" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-cash-stack">Reportes</a>
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-people"></i>
+                Personal
             </a>
+
+            <a href="#" class="sin-destino">
+                <i class="bi bi-cash-stack"></i>
+                Reportes
+            </a>
+
         </nav>
 
+        <!-- Opciones inferiores -->
         <div class="sidebar-footer">
-            <a href="../index.html" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-gear">Configuracion</a>
+
+            <a href="configuracionAdmin.html">
+                <i class="bi bi-gear-fill"></i>
+                Configuración
             </a>
-            <a href="../index.html" class="btn btn-sammy btn-lg px-4 sidebar-link bi bi-box-arrow-right">Cierre de sesion</a>
+
+            <a href="../index.html">
+                <i class="bi bi-box-arrow-right"></i>
+                Cerrar Sesión
             </a>
+
         </div>
     </aside>
+
+    <!-- Backdrop oscuro para móvil -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
     <!-- Main Content -->
     <div class="main-wrapper">
         <!-- Top Header -->
         <header class="topbar">
-            <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-outline-secondary d-lg-none" id="toggleSidebar">
-                    <i class="bi bi-list"></i>
-                </button>
+            <div class="d-flex align-items-center">
                 <h1 class="topbar-title">Resumen del Panel</h1>
             </div>
 
-            <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-link text-dark p-1 position-relative">
-                    <a href="#"></a>
+            <div class="d-flex align-items-center gap-2 gap-sm-3">
+                <button class="btn btn-link text-dark p-1 position-relative" type="button" aria-label="Notificaciones">
                     <i class="bi bi-bell fs-5"></i>
                 </button>
-                <img src="../img/imagen-fondo.jpg"
-                    alt="Perfil" class="rounded-circle" width="34" height="34" style="object-fit: cover;">
+                <img src="../img/imagen-fondo.jpg" alt="Perfil" class="rounded-circle" width="34" height="34" style="object-fit: cover;">
+                <button class="btn btn-outline-secondary d-lg-none" id="toggleSidebar" type="button" aria-label="Abrir menú">
+                    <i class="bi bi-list"></i>
+                </button>
             </div>
         </header>
 
         <!-- Dashboard Body -->
-        <main class="container-fluid p-4">
+        <main class="container-fluid p-3 p-sm-4">
             <!-- Top Row: KPIs & Alerts -->
-            <div class="row g-4 mb-4">
+            <div class="row g-3 g-md-4 mb-4">
                 <!-- KPI 1: Pedidos Activos -->
                 <div class="col-12 col-md-6 col-xl-4">
                     <div class="dashboard-card">
@@ -118,29 +150,25 @@
                     <!-- Alert 1 -->
                     <div class="alert-card-danger">
                         <div>
-                            <div class="d-flex align-items-center gap-2 fw-bold text-danger-emphasis"
-                                style="font-size: 0.9rem;">
+                            <div class="d-flex align-items-center gap-2 fw-bold text-danger-emphasis" style="font-size: 0.9rem;">
                                 <i class="bi bi-exclamation-triangle-fill text-danger"></i>
                                 <span>Stock de Tela Bajo</span>
                             </div>
                             <div class="text-danger mt-1" style="font-size: 0.8rem;">Premium Mesh &lt; 50 yds</div>
                         </div>
-                        <button class="btn-alert-red"
-                            onclick="alert('Redirigiendo a orden de compra...')">Reordenar</button>
+                        <button type="button" class="btn-alert-red" onclick="alert('Redirigiendo a orden de compra...')">Reordenar</button>
                     </div>
 
                     <!-- Alert 2 -->
                     <div class="alert-card-warning">
                         <div>
-                            <div class="d-flex align-items-center gap-2 fw-bold"
-                                style="font-size: 0.9rem; color: #4a2311;">
+                            <div class="d-flex align-items-center gap-2 fw-bold" style="font-size: 0.9rem; color: #4a2311;">
                                 <i class="bi bi-clock-fill"></i>
                                 <span>Pedidos Retrasados</span>
                             </div>
                             <div class="mt-1" style="font-size: 0.8rem; color: #5d3a29;">14 orders past SLA</div>
                         </div>
-                        <button class="btn-alert-brown"
-                            onclick="alert('Mostrando los 14 pedidos retrasados...')">Revisar</button>
+                        <button type="button" class="btn-alert-brown" onclick="alert('Mostrando los 14 pedidos retrasados...')">Revisar</button>
                     </div>
                 </div>
             </div>
@@ -150,13 +178,11 @@
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <h5 class="fw-bold mb-0">Rendimiento Financiero</h5>
                     <div class="d-flex gap-2" id="chartFilters">
-                        <button class="chart-filter-btn" data-period="semana">Semana</button>
-                        <button class="chart-filter-btn active" data-period="mes">Mes</button>
-                        <button class="chart-filter-btn" data-period="ano">Año</button>
+                        <button type="button" class="chart-filter-btn" data-period="semana">Semana</button>
+                        <button type="button" class="chart-filter-btn active" data-period="mes">Mes</button>
+                        <button type="button" class="chart-filter-btn" data-period="ano">Año</button>
                     </div>
                 </div>
-
-
 
                 <div class="bar-chart-wrapper">
                     <div class="chart-grid-lines">
@@ -187,8 +213,7 @@
             <div class="dashboard-card">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold mb-0">Transacciones Recientes</h5>
-                    <a href="#" class="text-decoration-none fw-bold"
-                        style="color: var(--accent-blue); font-size: 0.88rem;">Ver Todo</a>
+                    <a href="#" class="text-decoration-none fw-bold" style="color: var(--accent-blue); font-size: 0.88rem;">Ver Todo</a>
                 </div>
 
                 <div class="table-responsive">
@@ -229,7 +254,7 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/panelControl.js"></script>
+    <script src="../admin/js/panelControl.js"></script>
 </body>
 
 </html>
