@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planilla de Detalle de Pedido - Sammy Sports</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/detallePedido.css" />
+</head>
+<body>
+  <button type="button" class="menu-movil" id="abrirMenu" aria-label="Abrir menú">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-profile">
+      <img src="../img/imagen-fondo.jpg" alt="Administrador" />
+      <h3>Administrador</h3>
+      <small>Sammy Sports Management</small>
+    </div>
+
+    <div class="sidebar-brand">
+      <h2>SAMMY<br />SPORTS</h2>
+      <small>Panel Administrativo</small>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="panelControl.html">
+        <i class="bi bi-grid-1x2"></i>
+        Panel de Control
+      </a>
+      <a href="Inventario.html">
+        <i class="bi bi-archive"></i>
+        Inventario
+      </a>
+      <a href="catalogoAdmin.html">
+        <i class="bi bi-diagram-3"></i>
+        Catálogo
+      </a>
+      <a href="Pedidos.html" class="active" aria-current="page">
+        <i class="bi bi-receipt"></i>
+        Pedidos
+      </a>
+      <a href="#" class="sin-destino">
+        <i class="bi bi-people"></i>
+        Personal
+      </a>
+      <a href="#" class="sin-destino">
+        <i class="bi bi-cash-stack"></i>
+        Reportes
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="configuracionAdmin.html">
+        <i class="bi bi-gear-fill"></i>
+        Configuración
+      </a>
+      <a href="../index.html">
+        <i class="bi bi-box-arrow-right"></i>
+        Cerrar Sesión
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top-header">
+      <div>
+        <h1>Planilla de Detalle de Pedido</h1>
+        <p>Complete los datos específicos de cada integrante del equipo.</p>
+      </div>
+      <a href="Pedidos.html" class="btn-volver">
+        <i class="bi bi-arrow-left"></i>
+        Volver a Pedidos
+      </a>
+    </header>
+
+    <div id="avisoEstado" class="aviso oculto" role="status"></div>
+
+    <div class="layout-grid">
+      <!-- Columna izquierda: Datos del pedido y tabla de integrantes -->
+      <section class="panel-principal">
+        <div class="meta-card">
+          <div class="meta-item">
+            <label for="inputCliente">
+              <i class="bi bi-person-badge"></i>
+              Cliente:
+            </label>
+            <input type="text" id="inputCliente" placeholder="Ej. Club Atlético Juvenil" />
+          </div>
+
+          <div class="meta-item">
+            <label for="inputUniforme">
+              <i class="bi bi-shirt"></i>
+              Uniforme:
+            </label>
+            <input type="text" id="inputUniforme" placeholder="Ej. Modelo Titular 2024 (Azul/Blanco)" />
+          </div>
+
+          <div class="meta-item meta-full">
+            <label for="inputNotas">
+              <i class="bi bi-rulers"></i>
+              Notas de Medidas:
+            </label>
+            <textarea id="inputNotas" rows="2" placeholder="Ej. Longitud extendida en tops, ajuste ceñido para pantalones..."></textarea>
+          </div>
+        </div>
+
+        <div class="tabla-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre/Apellido</th>
+                <th>Número</th>
+                <th>T. Camiseta</th>
+                <th>T. Pantalón</th>
+                <th>Posición</th>
+                <th>Observaciones</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cuerpoIntegrantes"></tbody>
+          </table>
+        </div>
+
+        <div class="acciones-fila">
+          <button type="button" id="btnAgregarJugador" class="btn-link-accion">
+            <i class="bi bi-plus-circle"></i>
+            Agregar Jugador
+          </button>
+
+          <button type="button" id="btnDuplicarFila" class="btn-link-secundario">
+            <i class="bi bi-files"></i>
+            Duplicar Fila Anterior
+          </button>
+        </div>
+
+        <div class="acciones-guardar">
+          <button type="button" id="btnGuardarPedido" class="btn-guardar">
+            Guardar Pedido
+          </button>
+        </div>
+
+        <div class="acciones-extra">
+          <button type="button" id="btnExportarPDF" class="btn-pdf">
+            <i class="bi bi-file-earmark-pdf"></i>
+            Exportar PDF
+          </button>
+        </div>
+      </section>
+
+      <!-- Columna derecha: Consolidado de tallas -->
+      <aside class="panel-tallas">
+        <h2>
+          <i class="bi bi-bar-chart-line"></i>
+          Consolidado de Tallas
+        </h2>
+
+        <div class="grupo-tallas">
+          <h3>RESUMEN DE CAMISETAS</h3>
+          <div class="grid-tallas">
+            <div class="talla-box">
+              <span>S</span>
+              <strong id="cam-S">0</strong>
+            </div>
+            <div class="talla-box">
+              <span>M</span>
+              <strong id="cam-M">0</strong>
+            </div>
+            <div class="talla-box">
+              <span>L</span>
+              <strong id="cam-L">0</strong>
+            </div>
+            <div class="talla-box">
+              <span>XL</span>
+              <strong id="cam-XL">0</strong>
+            </div>
+          </div>
+          <div class="total-linea">Total: <strong id="totalCamisetas">0</strong></div>
+        </div>
+
+        <div class="grupo-tallas">
+          <h3>RESUMEN DE PANTALONES</h3>
+          <div class="grid-tallas">
+            <div class="talla-box">
+              <span>S</span>
+              <strong id="pan-S">0</strong>
+            </div>
+            <div class="talla-box">
+              <span>M</span>
+              <strong id="pan-M">0</strong>
+            </div>
+            <div class="talla-box">
+              <span>L</span>
+              <strong id="pan-L">0</strong>
+            </div>
+            <div class="talla-box">
+              <span>XL</span>
+              <strong id="pan-XL">0</strong>
+            </div>
+          </div>
+          <div class="total-linea">Total: <strong id="totalPantalones">0</strong></div>
+        </div>
+
+        <div class="grupo-tallas">
+          <h3>ESPECIALES</h3>
+          <div class="especial-box">
+            <span><i class="bi bi-shield-shaded"></i> Arqueros</span>
+            <strong id="totalArqueros">0</strong>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="js/detallePedido.js"></script>
+</body>
+</html>
