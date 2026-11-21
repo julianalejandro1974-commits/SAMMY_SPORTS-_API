@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nómina y Pagos - Sammy Sports</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/nominaAdmin.css">
+    <script src="js/nominaAdmin.js" defer></script>
+</head>
+<body>
+
+    <!-- Menú lateral -->
+    <aside class="sidebar">
+        <div class="perfil">
+            <img src="../img/imagen-fondo.jpg" alt="Administrador">
+            <h3>Administrador</h3>
+            <small>Sammy Sports Management</small>
+        </div>
+
+        <div class="marca">
+            <h2>SAMMY<br>SPORTS</h2>
+            <p>Panel Administrativo</p>
+        </div>
+
+        <nav>
+            <a href="panelControl.html">
+                <i class="bi bi-grid"></i> Panel de Control
+            </a>
+            <a href="Inventario.html">
+                <i class="bi bi-archive"></i> Inventario
+            </a>
+            <a href="catalogoAdmin.html">
+                <i class="bi bi-diagram-3"></i> Catálogo
+            </a>
+            <a href="Pedidos.html">
+                <i class="bi bi-receipt"></i> Pedidos
+            </a>
+            <a href="personalAdmin.html" class="activo">
+                <i class="bi bi-people-fill"></i> Personal
+            </a>
+            <a href="#">
+                <i class="bi bi-cash-stack"></i> Reportes
+            </a>
+        </nav>
+
+        <div class="menu-final">
+            <a href="configuracionAdmin.html"><i class="bi bi-gear"></i> Configuración</a>
+            <a href="#"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a>
+        </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="contenido">
+
+        <header class="barra-superior">
+            <h3>Nómina y Pagos</h3>
+            <div class="iconos">
+                <i class="bi bi-bell"></i>
+                <i class="bi bi-question-circle"></i>
+                <i class="bi bi-person-circle"></i>
+            </div>
+        </header>
+
+        <div class="contenedor">
+
+            <div class="acciones">
+                <a href="personalAdmin.html" class="volver">
+                    <i class="bi bi-arrow-left"></i>
+                    Volver a Lista de Personal
+                </a>
+
+                <button id="imprimir">
+                    <i class="bi bi-printer-fill"></i>
+                    Imprimir / Descargar PDF
+                </button>
+            </div>
+
+            <!-- Comprobante -->
+            <section class="comprobante">
+
+                <div class="comprobante-encabezado">
+                    <div>
+                        <h1>SAMMY SPORTS</h1>
+                        <p>División de Manufactura y Producción</p>
+                        <p>NIT: 900.123.456-7</p>
+                    </div>
+
+                    <div class="titulo-pago">
+                        <h2>Comprobante de Pago</h2>
+                        <div class="periodo">
+                            <span>PERIODO DE LIQUIDACIÓN</span>
+                            <strong>1 - 15 Octubre 2026</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datos del empleado -->
+                <div class="datos-empleado">
+                    <div>
+                        <small>NOMBRE DEL EMPLEADO</small>
+                        <strong id="nombreEmpleado"></strong>
+                    </div>
+
+                    <div>
+                        <small>ID OPERARIO</small>
+                        <strong id="idEmpleado"></strong>
+                    </div>
+
+                    <div>
+                        <small>CARGO</small>
+                        <strong id="cargoEmpleado"></strong>
+                    </div>
+                </div>
+
+                <!-- Ingresos -->
+                <section class="seccion">
+                    <h3>
+                        <i class="bi bi-plus-circle"></i>
+                        Ingresos por Producción (Destajo)
+                    </h3>
+
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Producto Elaborado</th>
+                                    <th>Cantidad</th>
+                                    <th>Tarifa Unitaria</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaIngresos"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="total-ingresos">
+                        <span>Total Ingresos Brutos</span>
+                        <strong id="totalBruto">$0.00</strong>
+                    </div>
+                </section>
+
+                <!-- Deducciones -->
+                <section class="seccion">
+                    <h3>
+                        <i class="bi bi-dash-circle rojo"></i>
+                        Deducciones y Adelantos
+                    </h3>
+
+                    <div class="deducciones" id="listaDeducciones"></div>
+                </section>
+
+                <!-- Resumen final -->
+                <div class="resultado">
+
+                    <div class="firma">
+                        <small>Firma del Empleado (Recibí Conforme)</small>
+                        <div class="linea-firma"></div>
+                    </div>
+
+                    <div class="resumen-pago">
+                        <div>
+                            <span>Total Ingresos</span>
+                            <strong id="resumenIngresos">$0.00</strong>
+                        </div>
+
+                        <div>
+                            <span>Total Deducciones</span>
+                            <strong id="resumenDeducciones" class="rojo">$0.00</strong>
+                        </div>
+
+                        <hr>
+
+                        <div class="neto">
+                            <strong>Neto a Pagar</strong>
+                            <strong id="netoPagar">$0.00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="pie-comprobante">
+                    Documento de demostración generado por SAMMY SPORTS
+                </footer>
+
+            </section>
+        </div>
+    </main>
+
+</body>
+</html>

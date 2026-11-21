@@ -1,0 +1,488 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f8ff;
+    color: #102238;
+}
+
+/* MENÚ LATERAL */
+
+.sidebar {
+    width: 256px;
+    height: 100vh;
+    position: fixed;
+    background: #223247;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil {
+    text-align: center;
+    padding-top: 25px;
+}
+
+.perfil img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.perfil h3 {
+    margin: 10px 0 3px;
+}
+
+.perfil small {
+    color: #aebcda;
+}
+
+.marca {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.marca h2 {
+    font-size: 25px;
+    margin: 0;
+}
+
+.marca p {
+    color: #8c98ac;
+    font-size: 13px;
+}
+
+.sidebar nav {
+    padding: 0 20px;
+    flex: 1;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px;
+    color: #d7deee;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.sidebar a:hover {
+    background: #30445d;
+}
+
+.sidebar a.activo {
+    background: #df4300;
+    color: white;
+    font-weight: bold;
+}
+
+.menu-final {
+    border-top: 1px solid #ffffff30;
+    padding: 15px 20px;
+}
+
+/* CONTENIDO */
+
+.contenido {
+    margin-left: 256px;
+}
+
+.barra-superior {
+    background: white;
+    border-bottom: 1px solid #d6d9e8;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.barra-superior h3 {
+    margin: 0;
+    color: #0046d5;
+    font-size: 21px;
+}
+
+.iconos {
+    display: flex;
+    gap: 30px;
+    font-size: 20px;
+    color: #4c566c;
+}
+
+.contenedor {
+    max-width: 1100px;
+    margin: auto;
+    padding: 48px;
+}
+
+.acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.volver {
+    text-decoration: none;
+    color: #424b61;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.volver i {
+    margin-right: 8px;
+}
+
+#imprimir {
+    background: #0046d5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* COMPROBANTE */
+
+.comprobante {
+    background: white;
+    border: 1px solid #dce1ec;
+    border-radius: 12px;
+    padding: 65px;
+    box-shadow: 0 5px 12px #00000012;
+}
+
+.comprobante-encabezado {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 2px solid #0046d5;
+    padding-bottom: 40px;
+}
+
+.comprobante-encabezado h1 {
+    color: #0046d5;
+    font-size: 36px;
+    margin: 0 0 10px;
+}
+
+.comprobante-encabezado p {
+    margin: 5px 0;
+    color: #424b61;
+}
+
+.titulo-pago {
+    text-align: right;
+}
+
+.titulo-pago h2 {
+    font-size: 29px;
+    margin: 0 0 15px;
+}
+
+.periodo {
+    background: #e5eeff;
+    border-radius: 6px;
+    padding: 12px 18px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+}
+
+.periodo span {
+    color: #0046d5;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.periodo strong {
+    font-size: 20px;
+}
+
+/* EMPLEADO */
+
+.datos-empleado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    background: #f7f8ff;
+    border: 1px solid #e2e6f3;
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 40px;
+}
+
+.datos-empleado small {
+    display: block;
+    color: #6c758c;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.datos-empleado strong {
+    font-size: 18px;
+}
+
+/* INGRESOS */
+
+.seccion {
+    margin-top: 65px;
+}
+
+.seccion h3 {
+    font-size: 20px;
+    margin-bottom: 28px;
+}
+
+.seccion h3 i {
+    color: #0046d5;
+}
+
+.seccion h3 i.rojo {
+    color: #d40000;
+}
+
+.tabla-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    color: #424b61;
+    font-size: 14px;
+    padding: 15px;
+    border-bottom: 2px solid #c6ccdc;
+}
+
+td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #e1e5ee;
+}
+
+th:not(:first-child),
+td:not(:first-child) {
+    text-align: right;
+}
+
+.total-ingresos {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 60px;
+    padding: 25px 15px;
+    font-size: 14px;
+}
+
+.total-ingresos strong {
+    font-size: 20px;
+    color: #0046d5;
+}
+
+/* DEDUCCIONES */
+
+.deducciones {
+    background: #fff8f8;
+    border: 1px solid #ffd3d3;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.deduccion-fila {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #f1e4e4;
+}
+
+.deduccion-fila:last-child {
+    border-bottom: none;
+}
+
+.rojo {
+    color: #d40000;
+}
+
+/* RESULTADO FINAL */
+
+.resultado {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+    border-top: 2px solid #c6ccdc;
+    margin-top: 45px;
+    padding-top: 65px;
+}
+
+.firma {
+    width: 260px;
+}
+
+.firma small {
+    color: #6c758c;
+}
+
+.linea-firma {
+    border-bottom: 1px solid #bdc9e6;
+    margin-top: 60px;
+}
+
+.resumen-pago {
+    background: #dce8ff;
+    border: 1px solid #c8d8f6;
+    border-radius: 12px;
+    padding: 24px;
+    min-width: 330px;
+}
+
+.resumen-pago > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.resumen-pago hr {
+    border: 0;
+    border-top: 1px solid #c5d3ed;
+    margin: 25px 0;
+}
+
+.resumen-pago .neto {
+    align-items: center;
+    margin: 0;
+    font-size: 19px;
+}
+
+.neto strong:last-child {
+    color: #0046d5;
+    font-size: 34px;
+}
+
+.pie-comprobante {
+    text-align: center;
+    color: #6c758c;
+    font-size: 12px;
+    margin-top: 45px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+    .comprobante {
+        padding: 30px;
+    }
+
+    .contenedor {
+        padding: 25px;
+    }
+
+    .comprobante-encabezado {
+        flex-direction: column;
+    }
+
+    .titulo-pago {
+        text-align: left;
+    }
+}
+
+@media (max-width: 750px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .menu-final {
+        display: none;
+    }
+
+    .contenido {
+        margin-left: 0;
+    }
+
+    .barra-superior {
+        padding: 20px;
+    }
+
+    .acciones,
+    .resultado {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .datos-empleado {
+        grid-template-columns: 1fr;
+    }
+
+    .resumen-pago {
+        min-width: 0;
+    }
+
+    .neto strong:last-child {
+        font-size: 25px;
+    }
+}
+
+/* IMPRESIÓN Y PDF */
+
+@media print {
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+
+    body {
+        background: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .sidebar,
+    .barra-superior,
+    .acciones {
+        display: none;
+    }
+
+    .contenido {
+        margin: 0;
+    }
+
+    .contenedor {
+        padding: 0;
+        max-width: none;
+    }
+
+    .comprobante {
+        padding: 10px;
+        border: none;
+        box-shadow: none;
+    }
+
+    .seccion,
+    .resultado {
+        break-inside: avoid;
+    }
+}
