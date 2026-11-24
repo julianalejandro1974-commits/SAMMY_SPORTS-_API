@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/detallePedido.css" />
+
 </head>
 <body>
   <button type="button" class="menu-movil" id="abrirMenu" aria-label="Abrir menú">
@@ -67,7 +68,7 @@
   <main class="main">
     <header class="top-header">
       <div>
-        <h1>Planilla de Detalle de Pedido</h1>
+        <h1 id="tituloPlanilla">Planilla de Detalle de Pedido</h1>
         <p>Complete los datos específicos de cada integrante del equipo.</p>
       </div>
       <a href="Pedidos.html" class="btn-volver">
@@ -96,6 +97,29 @@
               Uniforme:
             </label>
             <input type="text" id="inputUniforme" placeholder="Ej. Modelo Titular 2024 (Azul/Blanco)" />
+          </div>
+
+          <div class="meta-item">
+            <label for="inputTotal">
+              <i class="bi bi-cash-coin"></i>
+              Total a pagar:
+            </label>
+            <input type="number" id="inputTotal" min="0" step="any" placeholder="Ej. 2400" />
+          </div>
+
+          <div class="meta-item">
+            <label for="inputAbono">
+              <i class="bi bi-wallet2"></i>
+              Abonado:
+            </label>
+            <input type="number" id="inputAbono" min="0" step="any" placeholder="0" />
+          </div>
+
+          <div class="meta-item meta-full">
+            <div class="resumen-pago" aria-live="polite">
+              <span>Saldo pendiente: <strong id="saldoPendiente">$0</strong></span>
+              <span>Estado de pago: <span id="estadoPagoTexto" class="badge-pago pendiente">Pendiente</span></span>
+            </div>
           </div>
 
           <div class="meta-item meta-full">
@@ -215,6 +239,8 @@
     </div>
   </main>
 
+  <!-- La capa de datos va primero: detallePedido.js depende de ella -->
+  <script src="js/pedidosApi.js"></script>
   <script src="js/detallePedido.js"></script>
 </body>
 </html>
