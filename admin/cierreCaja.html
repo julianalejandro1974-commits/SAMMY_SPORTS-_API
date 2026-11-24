@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sammy Sports - Cierre de Caja</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS compartido (menú lateral) -->
+    <link rel="stylesheet" href="css/inventario.css">
+    <!-- CSS propio del cierre de caja -->
+    <link rel="stylesheet" href="css/cierreCaja.css">
+    <script src="js/cierreCaja.js" defer></script>
+</head>
+
+<body>
+
+    <button class="menu-movil" id="abrirMenu" aria-label="Abrir menú">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <!-- Menú lateral -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-profile">
+            <img src="../img/imagen-fondo.jpg" alt="Administrador">
+            <h3>Administrador</h3>
+            <small>Sammy Sports Management</small>
+        </div>
+
+        <div class="sidebar-brand">
+            <h2>SAMMY<br>SPORTS</h2>
+            <small>Panel Administrativo</small>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="panelControl.html">
+                <i class="bi bi-grid-1x2"></i>
+                Panel de Control
+            </a>
+
+            <a href="Inventario.html">
+                <i class="bi bi-archive"></i>
+                Inventario
+            </a>
+
+            <a href="catalogoAdmin.html">
+                <i class="bi bi-diagram-3"></i>
+                Catálogo
+            </a>
+
+            <a href="Pedidos.html">
+                <i class="bi bi-receipt"></i>
+                Pedidos
+            </a>
+
+            <a href="personalAdmin.html">
+                <i class="bi bi-people"></i>
+                Personal
+            </a>
+
+            <a href="reportesAdmin.html" class="active" aria-current="page">
+                <i class="bi bi-cash-stack"></i>
+                Reportes
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="configuracionAdmin.html">
+                <i class="bi bi-gear-fill"></i>
+                Configuración
+            </a>
+
+            <a href="../index.html">
+                <i class="bi bi-box-arrow-right"></i>
+                Cerrar Sesión
+            </a>
+        </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="contenido">
+
+        <header class="caj-encabezado">
+            <div>
+                <h1>Cierre de Caja y Balance Diario</h1>
+                <p>Gestión administrativa de fin de jornada</p>
+            </div>
+
+            <div class="caj-acciones">
+                <a href="reportesAdmin.html" class="caj-volver">
+                    <i class="bi bi-arrow-left"></i> Volver a Reportes
+                </a>
+                <input type="date" id="fecha" aria-label="Fecha del cierre">
+                <button type="button" id="finalizar" class="caj-btn caj-btn-naranja">
+                    <i class="bi bi-check2-circle"></i> Finalizar y Cerrar Día
+                </button>
+            </div>
+        </header>
+
+        <div class="caj-layout">
+
+            <!-- Columna izquierda -->
+            <div class="caj-col">
+
+                <!-- Resumen de ingresos -->
+                <section class="caj-panel">
+                    <div class="caj-panel-head">
+                        <h2><i class="bi bi-wallet2 caj-azul"></i> Resumen de Ingresos</h2>
+                        <div class="caj-total">
+                            <small>TOTAL BRUTO</small>
+                            <strong id="totalBruto">$0</strong>
+                        </div>
+                    </div>
+
+                    <div class="caj-stats">
+                        <div class="caj-stat">
+                            <div><span>Ventas y Cotizaciones</span><i class="bi bi-file-earmark-text"></i></div>
+                            <strong id="ventas">$0</strong>
+                            <small class="caj-rojo">+12% vs ayer</small>
+                        </div>
+                        <div class="caj-stat">
+                            <div><span>Abonos Recibidos</span><i class="bi bi-wallet"></i></div>
+                            <strong id="abonos">$0</strong>
+                            <small id="numAbonos">0 transacciones</small>
+                        </div>
+                    </div>
+
+                    <h3 class="caj-sub">Desglose por medio de pago</h3>
+
+                    <form id="formMedio" class="caj-form" novalidate>
+                        <div class="caj-campo">
+                            <label for="medio">Medio de Pago</label>
+                            <select id="medio">
+                                <option>Nequi</option>
+                                <option>Daviplata</option>
+                                <option>Bancolombia</option>
+                                <option>Efectivo</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                        <div class="caj-campo caj-crece">
+                            <label for="montoMedio">Monto</label>
+                            <input type="number" id="montoMedio" min="1" step="1" placeholder="$0" required>
+                        </div>
+                        <button type="submit" class="caj-btn caj-btn-azul">Agregar</button>
+                    </form>
+
+                    <div class="caj-scroll">
+                        <table class="caj-tabla">
+                            <thead>
+                                <tr>
+                                    <th>Medio de Pago</th>
+                                    <th class="caj-der">Monto Registrado</th>
+                                    <th class="caj-der">Monto Físico/Reportado</th>
+                                    <th class="caj-der">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaMedios"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Registro de gastos -->
+                <section class="caj-panel">
+                    <h2><i class="bi bi-graph-down-arrow caj-rojo"></i> Registro de Gastos (Salidas)</h2>
+
+                    <form id="formGasto" class="caj-form" novalidate>
+                        <div class="caj-campo caj-crece">
+                            <label for="concepto">Concepto</label>
+                            <input type="text" id="concepto" placeholder="Ej. Compra de hilos" required>
+                        </div>
+                        <div class="caj-campo">
+                            <label for="categoria">Categoría</label>
+                            <select id="categoria">
+                                <option>Insumos</option>
+                                <option>Mantenimiento</option>
+                                <option>Transporte</option>
+                                <option>Nómina</option>
+                                <option>Otros</option>
+                            </select>
+                        </div>
+                        <div class="caj-campo">
+                            <label for="montoGasto">Monto</label>
+                            <input type="number" id="montoGasto" min="1" step="1" placeholder="$0" required>
+                        </div>
+                        <label for="soporte" class="caj-soporte" id="etiquetaSoporte">
+                            <i class="bi bi-paperclip"></i> <span>Soporte</span>
+                        </label>
+                        <input type="file" id="soporte" accept="image/*,.pdf" hidden>
+                        <button type="submit" class="caj-btn caj-btn-azul">Agregar</button>
+                    </form>
+
+                    <p class="caj-error" id="errorGasto" role="alert" hidden></p>
+
+                    <div class="caj-scroll">
+                        <table class="caj-tabla">
+                            <thead>
+                                <tr>
+                                    <th>Hora</th>
+                                    <th>Concepto</th>
+                                    <th>Categoría</th>
+                                    <th class="caj-der">Monto</th>
+                                    <th class="caj-der">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaGastos"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Columna derecha -->
+            <div class="caj-col">
+
+                <section class="caj-balance">
+                    <h2><i class="bi bi-calculator"></i> Balance Teórico</h2>
+                    <div><span>Ingresos Totales</span><strong id="balIngresos">$0</strong></div>
+                    <div><span>Gastos Totales</span><strong class="caj-gasto-txt" id="balGastos">-$0</strong></div>
+                    <hr>
+                    <div class="caj-esperado"><span>Saldo Esperado</span><strong id="balSaldo">$0</strong></div>
+                </section>
+
+                <section class="caj-panel">
+                    <h2 class="caj-h-sm">Arqueo Real de Caja</h2>
+
+                    <div class="caj-campo">
+                        <label for="efectivoContado">Efectivo Físico Contado</label>
+                        <div class="caj-dinero">
+                            <span>$</span>
+                            <input type="number" id="efectivoContado" min="0" step="1" placeholder="0">
+                        </div>
+                    </div>
+
+                    <div class="caj-estado" id="estadoArqueo" role="status" aria-live="polite"></div>
+
+                    <div class="caj-campo">
+                        <label for="observaciones">Observaciones Generales</label>
+                        <textarea id="observaciones" rows="4" placeholder="Novedades, billetes falsos, vales pendientes..."></textarea>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+    </main>
+
+</body>
+</html>

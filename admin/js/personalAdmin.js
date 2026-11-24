@@ -1,4 +1,3 @@
-
 // SAMMY SPORTS - PERSONAL Y NÓMINA
 
 // Empleados de ejemplo tomados del prototipo
@@ -275,6 +274,25 @@ document.getElementById("descargarLote").onclick = function () {
     mensaje.textContent =
         "La descarga de PDF por lote se implementará con los comprobantes.";
 };
+
+// Menú en celulares
+const abrirMenu = document.getElementById("abrirMenu");
+const sidebar = document.getElementById("sidebar");
+
+abrirMenu.onclick = function () {
+    sidebar.classList.toggle("abierta");
+};
+
+document.addEventListener("click", function (e) {
+    if (
+        window.innerWidth <= 750 &&
+        sidebar.classList.contains("abierta") &&
+        !sidebar.contains(e.target) &&
+        !abrirMenu.contains(e.target)
+    ) {
+        sidebar.classList.remove("abierta");
+    }
+});
 
 // Cargar datos iniciales
 cargarTrabajadores();
