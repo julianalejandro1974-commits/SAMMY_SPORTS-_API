@@ -13,24 +13,24 @@
 }
 
 body {
-    margin: 0;
-    background: var(--bg-main);
-    color: var(--text-dark);
-    font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--text-dark);
+  font-family: 'Inter', sans-serif;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 250px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: var(--sidebar-bg);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    z-index: 1030;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--sidebar-bg);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  z-index: 1030;
 }
 
 .sidebar-profile {
@@ -39,13 +39,14 @@ body {
 }
 
 .sidebar-profile img {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ffffff33;
-    margin-bottom: 0.75rem;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff33;
+  margin-bottom: 0.75rem;
 }
+
 .sidebar-profile h3 {
   font-size: 1rem;
   font-weight: 700;
@@ -72,8 +73,8 @@ body {
 }
 
 .sidebar-brand small {
-    font-size: 0.72rem;
-    color: #7f8aa0;
+  font-size: 0.72rem;
+  color: #7f8aa0;
 }
 
 .sidebar-nav {
@@ -82,38 +83,38 @@ body {
 }
 
 .sidebar a {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    color: #d1d5db;
-    text-decoration: none;
-    padding: 0.7rem 1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 0.35rem;
-    transition: 0s;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: #d1d5db;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  transition: 0s;
 }
 
 .sidebar a i {
-    font-size: 0.9rem;
-    width: 16px;
+  font-size: 0.9rem;
+  width: 16px;
 }
 
 .sidebar a:hover {
-    background: #263a52;
-    color: white;
+  background: #263a52;
+  color: white;
 }
 
 .sidebar a.active {
-    background: var(--accent-orange);
-    color: white;
-    font-weight: 600;
+  background: var(--accent-orange);
+  color: white;
+  font-weight: 600;
 }
 
 .sidebar-footer {
-    padding: 1rem;
-    border-top: 1px solid #ffffff14;
+  padding: 1rem;
+  border-top: 1px solid #ffffff14;
 }
 
 /* Main Content Wrapper */
