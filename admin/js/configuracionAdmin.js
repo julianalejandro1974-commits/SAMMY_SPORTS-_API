@@ -1,4 +1,3 @@
-
 // SAMMY SPORTS - CONFIGURACIÓN
 
 const formulario = document.getElementById("formConfiguracion");
@@ -128,6 +127,25 @@ document.getElementById("cancelar").addEventListener("click", function () {
     fotoArchivo.value = "";
 
     mensaje.textContent = "Cambios cancelados.";
+});
+
+// Menú en celulares
+const abrirMenu = document.getElementById("abrirMenu");
+const sidebar = document.getElementById("sidebar");
+
+abrirMenu.onclick = function () {
+    sidebar.classList.toggle("abierta");
+};
+
+document.addEventListener("click", function (e) {
+    if (
+        window.innerWidth <= 750 &&
+        sidebar.classList.contains("abierta") &&
+        !sidebar.contains(e.target) &&
+        !abrirMenu.contains(e.target)
+    ) {
+        sidebar.classList.remove("abierta");
+    }
 });
 
 // Inicializar
