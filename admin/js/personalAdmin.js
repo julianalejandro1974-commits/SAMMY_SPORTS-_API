@@ -279,20 +279,22 @@ document.getElementById("descargarLote").onclick = function () {
 const abrirMenu = document.getElementById("abrirMenu");
 const sidebar = document.getElementById("sidebar");
 
-abrirMenu.onclick = function () {
-    sidebar.classList.toggle("abierta");
-};
+if (abrirMenu && sidebar) {
+    abrirMenu.onclick = function () {
+        sidebar.classList.toggle("abierta");
+    };
 
-document.addEventListener("click", function (e) {
-    if (
-        window.innerWidth <= 750 &&
-        sidebar.classList.contains("abierta") &&
-        !sidebar.contains(e.target) &&
-        !abrirMenu.contains(e.target)
-    ) {
-        sidebar.classList.remove("abierta");
-    }
-});
+    document.addEventListener("click", function (e) {
+        if (
+            window.innerWidth <= 750 &&
+            sidebar.classList.contains("abierta") &&
+            !sidebar.contains(e.target) &&
+            !abrirMenu.contains(e.target)
+        ) {
+            sidebar.classList.remove("abierta");
+        }
+    });
+}
 
 // Cargar datos iniciales
 cargarTrabajadores();
