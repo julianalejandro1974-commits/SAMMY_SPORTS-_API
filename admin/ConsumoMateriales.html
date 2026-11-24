@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sammy Sports - Consumo de Materiales</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS compartido (menú lateral) y CSS propio -->
+    <link rel="stylesheet" href="css/inventario.css">
+    <link rel="stylesheet" href="css/consumoMateriales.css">
+
+    <!-- Capa de datos de pedidos primero, luego el script de la página -->
+    <script src="js/pedidosApi.js" defer></script>
+    <script src="js/consumoMateriales.js" defer></script>
+</head>
+
+<body>
+
+    <button class="menu-movil" id="abrirMenu" aria-label="Abrir menú">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-profile">
+            <img src="../img/imagen-fondo.jpg" alt="Administrador">
+            <h3>Administrador</h3>
+            <small>Sammy Sports Management</small>
+        </div>
+
+        <div class="sidebar-brand">
+            <h2>SAMMY<br>SPORTS</h2>
+            <small>Panel Administrativo</small>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="panelControl.html"><i class="bi bi-grid-1x2"></i> Panel de Control</a>
+            <a href="Inventario.html" class="active" aria-current="page"><i class="bi bi-archive"></i> Inventario</a>
+            <a href="catalogoAdmin.html"><i class="bi bi-diagram-3"></i> Catálogo</a>
+            <a href="Pedidos.html"><i class="bi bi-receipt"></i> Pedidos</a>
+            <a href="personalAdmin.html"><i class="bi bi-people"></i> Personal</a>
+            <a href="reportesAdmin.html"><i class="bi bi-cash-stack"></i> Reportes</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="configuracionAdmin.html"><i class="bi bi-gear-fill"></i> Configuración</a>
+            <a href="../index.html"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a>
+        </div>
+    </aside>
+
+    <main class="contenido">
+
+        <header class="con-encabezado">
+            <div>
+                <h1>Consumo de Materiales</h1>
+                <p>Registra telas, hilos y demás insumos gastados al confeccionar. Se descuentan del inventario.</p>
+            </div>
+            <div class="con-acciones">
+                <a href="cierreCaja.html" class="con-volver"><i class="bi bi-arrow-left"></i> Cierre de Caja</a>
+                <a href="Inventario.html" class="con-volver"><i class="bi bi-archive"></i> Inventario</a>
+                <button type="button" id="exportar" class="con-btn con-btn-claro">
+                    <i class="bi bi-download"></i> Exportar CSV
+                </button>
+            </div>
+        </header>
+
+        <section class="con-kpis">
+            <article class="con-card"><small>Registros del día</small><strong id="kRegistros">0</strong></article>
+            <article class="con-card"><small>Materiales distintos</small><strong id="kMateriales">0</strong></article>
+            <article class="con-card"><small>Costo estimado</small><strong id="kCosto">$0</strong></article>
+        </section>
+
+        <div class="con-layout">
+
+            <!-- Formulario -->
+            <section class="con-card">
+                <h2><i class="bi bi-scissors con-azul"></i> Registrar consumo</h2>
+
+                <form id="formConsumo" novalidate>
+                    <div class="con-campo">
+                        <label for="fecha">Fecha</label>
+                        <input type="date" id="fecha" required>
+                    </div>
+
+                    <div class="con-campo">
+                        <label for="pedido">Pedido / prenda</label>
+                        <select id="pedido"><option value="">Uso general (sin pedido)</option></select>
+                    </div>
+
+                    <div class="con-campo">
+                        <label for="material">Material</label>
+                        <select id="material" required></select>
+                        <small id="infoStock" class="con-suave"></small>
+                    </div>
+
+                    <div class="con-campo">
+                        <label for="cantidad">Cantidad gastada <span id="unidadTxt" class="con-suave"></span></label>
+                        <input type="number" id="cantidad" min="0" step="any" placeholder="0" required>
+                    </div>
+
+                    <div class="con-campo">
+                        <label for="nota">Nota (opcional)</label>
+                        <input type="text" id="nota" maxlength="80" placeholder="Ej. Camisetas titulares talla M">
+                    </div>
+
+                    <p class="con-error" id="errorConsumo" role="alert" hidden></p>
+
+                    <button type="submit" class="con-btn con-btn-azul">
+                        <i class="bi bi-plus-circle"></i> Registrar consumo
+                    </button>
+                    <a href="registrosNuevosInsumos.html" class="con-enlace">¿No está el material? Regístralo en Inventario</a>
+                </form>
+            </section>
+
+            <!-- Tablas -->
+            <div class="con-col">
+                <section class="con-card">
+                    <div class="con-head">
+                        <h2>Consumo registrado</h2>
+                        <input type="date" id="fechaVer" aria-label="Ver consumo de la fecha">
+                    </div>
+
+                    <div class="con-scroll">
+                        <table class="con-tabla">
+                            <thead>
+                                <tr>
+                                    <th>Hora</th>
+                                    <th>Material</th>
+                                    <th>Pedido</th>
+                                    <th class="con-der">Cantidad</th>
+                                    <th class="con-der">Costo</th>
+                                    <th class="con-der">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaConsumo"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="con-card">
+                    <h2>Resumen por material</h2>
+                    <ul class="con-resumen" id="listaResumen"></ul>
+                </section>
+            </div>
+        </div>
+
+        <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+    </main>
+
+</body>
+</html>

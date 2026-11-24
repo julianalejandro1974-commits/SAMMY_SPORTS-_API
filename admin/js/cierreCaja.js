@@ -355,7 +355,23 @@ document.addEventListener("click", e => {
         sidebar.classList.remove("abierta");
     }
 });
+// Resumen de materiales consumidos en la fecha del cierre
+function mostrarMateriales() {
+    let lista = [];
+    try {
+        const datos = JSON.parse(localStorage.getItem("consumoMaterialesSammy"));
+        if (Array.isArray(datos)) lista = datos;
+    } catch (error) { }
 
+    const delDia = lista.filter(c => c.fecha === $("fecha").value);
+    const costo = delDia.reduce((s, c) => s + c.costoTotal, 0);
+
+    $("matResumen").textContent = delDia.length
+        ? delDia.length + (delDia.length === 1 ? " registro" : " registros") + " · costo estimado " + dinero(costo)
+        : "Sin consumo registrado en esta fecha.";
+}
+
+$("fecha").addEventListener("change", mostrarMateriales);
 // Inicio
 $("fecha").value = new Date().toISOString().slice(0, 10);
 $("efectivoContado").value = efectivo().registrado;

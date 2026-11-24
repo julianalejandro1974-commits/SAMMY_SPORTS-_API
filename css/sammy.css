@@ -102,6 +102,30 @@ body {
     color: var(--sammy-white);
 }
 
+/* ---------- Botón de acceso administrativo ---------- */
+.btn-sammy-admin {
+    background-color: var(--sammy-navy);
+    border: 1px solid var(--sammy-navy);
+    color: var(--sammy-white);
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(11, 29, 58, .25);
+    transition: background-color .2s, border-color .2s, box-shadow .25s ease, transform .2s ease;
+}
+
+.btn-sammy-admin:hover,
+.btn-sammy-admin:focus-visible {
+    background-color: var(--sammy-blue);
+    border-color: var(--sammy-blue);
+    color: var(--sammy-white);
+    box-shadow: 0 6px 22px rgba(var(--sammy-blue-rgb), .45);
+    transform: translateY(-1px);
+}
+
+.btn-sammy-admin:active {
+    transform: translateY(1px);
+}
+
 /* ---------- Formularios ---------- */
 .form-control,
 .form-select {
