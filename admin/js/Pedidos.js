@@ -1,9 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   const $ = s => document.querySelector(s);
+  const API = window.PedidosAPI; // definido en js/pedidosApi.js (debe cargarse antes)
 
   const CLAVE_BORRADOR = 'sammy_sports_pedido_borrador';
-  const CLAVE_ORDENES = 'sammy_sports_ordenes_activas';
   const URL_DETALLE_PEDIDO = 'detallePedido.html';
+
+  if (!API) {
+    console.error('Falta cargar js/pedidosApi.js antes de Pedidos.js');
+    return;
+  }
+  const { ESTADOS, ESTADOS_PAGO, derivarPago, saldoDe } = API;
 
   // ===== Menú hamburguesa (celular y tablet) =====
   const boton = $('#abrirMenu');
@@ -19,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       cambiar(!sidebar.classList.contains('ped-abierto'));
     });
-    // Cerrar al tocar fuera del menú, al elegir una opción o con Escape
     document.addEventListener('click', e => {
       if (!sidebar.contains(e.target)) cambiar(false);
     });
@@ -28,50 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => { if (window.innerWidth > 991) cambiar(false); });
   }
 
+  // ===== Utilidades de presentación =====
   const dinero = n => '$' + Number(n || 0).toLocaleString('en-US');
   const iniciales = n => String(n || '').split(' ').filter(Boolean).map(p => p[0]).join('').slice(0, 2).toUpperCase() || 'SA';
+  const num = v => Number(v) || 0;
+  const esc = t => String(t ?? '').replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-  const pedidosBase = [
-    { id: 'ORD-8901', cliente: 'Metro FC', detalle: 'Kits de Local (x24)', fecha: 'Oct 15, 2026', conf: 'M. Johnson', estado: 'confeccion', saldo: 1200 },
-    { id: 'ORD-8902', cliente: 'City High Track', detalle: 'Calentamientos (x40)', fecha: 'Oct 18, 2026', conf: 'S. Lee', estado: 'listo', saldo: 450 },
-    { id: 'ORD-8895', cliente: 'Valley Volleyball', detalle: 'Camisetas (x15)', fecha: 'Oct 10, 2026', conf: 'M. Johnson', estado: 'entregado', saldo: 0 }
-  ];
-
-  function obtenerOrdenesGuardadas() {
-    try {
-      const raw = JSON.parse(localStorage.getItem(CLAVE_ORDENES));
-      if (!Array.isArray(raw)) return [];
-
-      return raw.map(orden => ({
-        id: orden.id || 'ORD-9000',
-        cliente: orden.cliente || 'Cliente sin nombre',
-        detalle: `${orden.uniforme || 'Uniforme Personalizado'} (${orden.cantidadIntegrantes ?? (orden.jugadores?.length || 0)}x)`,
-        fecha: orden.fechaLimite || 'Por definir',
-        conf: orden.confeccionista || 'Sin asignar',
-        estado: 'confeccion',
-        saldo: Number(orden.saldo ?? 0)
-      }));
-    } catch (err) {
-      console.error('Error al leer órdenes activas de localStorage:', err);
-      return [];
-    }
+  function formatearFecha(iso) {
+    if (!iso) return 'Por definir';
+    const [y, m, d] = iso.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString('es-CO', { day: '2-digit', month: 'short', year: 'numeric' });
   }
 
-  const pedidos = [...obtenerOrdenesGuardadas(), ...pedidosBase];
-
-  const cotizaciones = [
-    { id: 'QT-4420', fecha: 'Oct 24', desc: 'Downtown Athletics - 50x Polos', monto: 1450, estado: 'borrador', rango: 'semana' },
-    { id: 'QT-4419', fecha: 'Oct 22', desc: 'Westside Tennis - Redes de Cancha y Equipo', monto: 3200, estado: 'enviado', rango: 'semana' },
-    { id: 'QT-4415', fecha: 'Oct 18', desc: 'Peak Performance Gym - Uniformes de Personal', monto: 890, estado: 'aceptado', rango: 'pasada' }
-  ];
-
-  const etiquetasEstado = {
-    confeccion: 'En Confección',
-    listo: 'Listo',
-    entregado: 'Entregado'
-  };
-
-  // Usa el <p id="mensaje"> que ya existe en la página
+  // ===== Mensajes =====
   const mensaje = $('#mensaje');
   let temporizador;
   function avisar(texto) {
@@ -81,27 +56,211 @@ document.addEventListener('DOMContentLoaded', () => {
     temporizador = setTimeout(() => (mensaje.textContent = ''), 3000);
   }
 
-  function pintarPedidos() {
-    $('#tablaPedidos').innerHTML = pedidos.map(p => `
-      <tr>
-        <td><span class="ped-id">${p.id}</span></td>
-        <td><div class="ped-cliente">${p.cliente}</div><small>${p.detalle}</small></td>
-        <td>${p.fecha}</td>
-        <td><span class="ped-quien"><i>${iniciales(p.conf)}</i>${p.conf}</span></td>
-        <td><span class="ped-estado ped-e-${p.estado}">${etiquetasEstado[p.estado] || 'En Confección'}</span></td>
-        <td class="ped-saldo">${p.saldo > 0
-          ? `${dinero(p.saldo)}<small class="debe">Pendiente</small>`
-          : `$0<small class="pagado">Pagado</small>`}</td>
-      </tr>`).join('');
+  // ===== Estado en memoria (copia de lo que devuelve la API) =====
+  let pedidos = [];
 
-    const pendientes = pedidos.filter(p => p.saldo > 0).length;
+  async function recargar() {
+    try {
+      pedidos = await API.listar();
+    } catch (err) {
+      console.error(err);
+      avisar('No se pudieron cargar los pedidos');
+      pedidos = [];
+    }
+    pintarPedidos();
+  }
+
+  const cotizaciones = [
+    { id: 'QT-4420', fecha: 'Oct 24', desc: 'Downtown Athletics - 50x Polos', monto: 1450, estado: 'borrador', rango: 'semana' },
+    { id: 'QT-4419', fecha: 'Oct 22', desc: 'Westside Tennis - Redes de Cancha y Equipo', monto: 3200, estado: 'enviado', rango: 'semana' },
+    { id: 'QT-4415', fecha: 'Oct 18', desc: 'Peak Performance Gym - Uniformes de Personal', monto: 890, estado: 'aceptado', rango: 'pasada' }
+  ];
+
+  // ===== Tabla (READ) =====
+  function filaPedido(p) {
+    const saldo = saldoDe(p);
+    const celdaSaldo = p.total <= 0
+      ? `—<small>Sin total definido</small>`
+      : saldo > 0
+        ? `${dinero(saldo)}<small class="debe">de ${dinero(p.total)}</small>`
+        : `$0<small class="pagado">Pagado</small>`;
+
+    const opcionesEstado = Object.entries(ESTADOS)
+      .map(([k, v]) => `<option value="${k}" ${k === p.estado ? 'selected' : ''}>${v}</option>`)
+      .join('');
+
+    return `
+      <tr>
+        <td><span class="ped-id">${esc(p.id)}</span></td>
+        <td><div class="ped-cliente">${esc(p.cliente)}</div><small>${esc(p.uniforme)} (x${esc(p.cantidadIntegrantes)})</small></td>
+        <td>${esc(formatearFecha(p.fechaLimite))}</td>
+        <td><span class="ped-quien"><i>${esc(iniciales(p.confeccionista))}</i>${esc(p.confeccionista)}</span></td>
+        <td>
+          <select class="ped-sel-estado ped-e-${p.estado}" data-id="${esc(p.id)}" aria-label="Estado del pedido ${esc(p.id)}">
+            ${opcionesEstado}
+          </select>
+        </td>
+        <td><span class="ped-pago ped-p-${p.estadoPago}">${ESTADOS_PAGO[p.estadoPago]}</span></td>
+        <td class="ped-saldo">${celdaSaldo}</td>
+        <td class="ped-acciones">
+          <a class="ped-icono" href="${URL_DETALLE_PEDIDO}?id=${encodeURIComponent(p.id)}" title="Ver / editar planilla" aria-label="Ver o editar planilla de ${esc(p.id)}"><i class="bi bi-card-list"></i></a>
+          <button type="button" class="ped-icono" data-accion="editar" data-id="${esc(p.id)}" title="Editar estado y pago" aria-label="Editar ${esc(p.id)}"><i class="bi bi-pencil-square"></i></button>
+          <button type="button" class="ped-icono ped-icono-peligro" data-accion="eliminar" data-id="${esc(p.id)}" title="Eliminar" aria-label="Eliminar ${esc(p.id)}"><i class="bi bi-trash"></i></button>
+        </td>
+      </tr>`;
+  }
+
+  function pintarPedidos() {
+    $('#tablaPedidos').innerHTML = pedidos.length
+      ? pedidos.map(filaPedido).join('')
+      : '<tr><td colspan="8" class="ped-vacio">No hay pedidos. Crea uno con "Nuevo Pedido".</td></tr>';
+
+    const conSaldo = pedidos.filter(p => saldoDe(p) > 0);
+    const suma = conSaldo.reduce((acc, p) => acc + saldoDe(p), 0);
     const alertaTexto = $('#pedAlertaTexto');
     if (alertaTexto) {
-      alertaTexto.textContent =
-        `${pendientes} pedidos tienen saldos pendientes pasada la marca de 50% de completado.`;
+      alertaTexto.textContent = conSaldo.length
+        ? `${conSaldo.length} pedido${conSaldo.length === 1 ? '' : 's'} con saldo pendiente. Total por cobrar: ${dinero(suma)}.`
+        : 'No hay saldos pendientes.';
     }
   }
 
+  // ===== Cambio rápido de estado (UPDATE) =====
+  $('#tablaPedidos')?.addEventListener('change', async e => {
+    const sel = e.target.closest('.ped-sel-estado');
+    if (!sel) return;
+    const id = sel.dataset.id;
+    try {
+      const orden = await API.actualizar(id, { estado: sel.value });
+      if (!orden) throw new Error('Pedido no encontrado');
+      avisar(`${id}: estado cambiado a "${ESTADOS[orden.estado]}"`);
+    } catch (err) {
+      console.error(err);
+      avisar('No se pudo cambiar el estado');
+    }
+    await recargar();
+  });
+
+  // ===== Editar / Eliminar =====
+  $('#tablaPedidos')?.addEventListener('click', e => {
+    const btn = e.target.closest('[data-accion]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (btn.dataset.accion === 'editar') abrirEdicion(id);
+    if (btn.dataset.accion === 'eliminar') eliminarPedido(id);
+  });
+
+  async function eliminarPedido(id) {
+    const orden = pedidos.find(p => p.id === id);
+    if (!orden) return;
+    const saldoTxt = saldoDe(orden) > 0 ? `\nOJO: tiene un saldo pendiente de ${dinero(saldoDe(orden))}.` : '';
+    if (!confirm(`¿Eliminar el pedido ${orden.id} de ${orden.cliente}?${saldoTxt}\nEsta acción no se puede deshacer.`)) return;
+    try {
+      await API.eliminar(id);
+      avisar(`Pedido ${id} eliminado`);
+    } catch (err) {
+      console.error(err);
+      avisar('No se pudo eliminar el pedido');
+    }
+    await recargar();
+  }
+
+  // ===== Modal de edición (UPDATE completo) =====
+  const dlg = $('#dlgPedido');
+  const f = {
+    id: $('#edId'), cliente: $('#edCliente'), fecha: $('#edFecha'), conf: $('#edConf'),
+    estado: $('#edEstado'), total: $('#edTotal'), abonado: $('#edAbonado'),
+    pago: $('#edPago'), saldo: $('#edSaldo'), error: $('#edError'), lista: $('#listaConf')
+  };
+  let editandoId = null;
+
+  if (dlg) {
+    f.estado.innerHTML = Object.entries(ESTADOS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('');
+    f.pago.innerHTML = Object.entries(ESTADOS_PAGO).map(([k, v]) => `<option value="${k}">${v}</option>`).join('');
+  }
+
+  function refrescarSaldoModal() {
+    f.saldo.textContent = dinero(Math.max(num(f.total.value) - num(f.abonado.value), 0));
+  }
+
+  function abrirEdicion(id) {
+    const o = pedidos.find(p => p.id === id);
+    if (!o || !dlg) return;
+    editandoId = id;
+    f.id.textContent = o.id;
+    f.cliente.value = o.cliente;
+    f.fecha.value = o.fechaLimite;
+    f.conf.value = o.confeccionista === 'Sin asignar' ? '' : o.confeccionista;
+    f.estado.value = o.estado;
+    f.total.value = o.total;
+    f.abonado.value = o.abonado;
+    f.pago.value = o.estadoPago;
+    f.error.hidden = true;
+
+    const conocidos = [...new Set(pedidos.map(p => p.confeccionista).filter(c => c && c !== 'Sin asignar'))];
+    f.lista.innerHTML = conocidos.map(c => `<option value="${esc(c)}"></option>`).join('');
+
+    refrescarSaldoModal();
+    dlg.showModal();
+    f.cliente.focus();
+  }
+
+  // Total o abonado cambian -> el estado de pago se recalcula
+  [f.total, f.abonado].forEach(inp => inp?.addEventListener('input', () => {
+    f.pago.value = derivarPago(num(f.total.value), num(f.abonado.value));
+    refrescarSaldoModal();
+  }));
+
+  // Estado de pago cambia -> se ajusta el abonado
+  f.pago?.addEventListener('change', () => {
+    if (f.pago.value === 'pagado') f.abonado.value = num(f.total.value);
+    if (f.pago.value === 'pendiente') f.abonado.value = 0;
+    refrescarSaldoModal();
+  });
+
+  $('#edCancelar')?.addEventListener('click', () => dlg.close());
+  dlg?.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+  function errorModal(txt) {
+    f.error.textContent = txt;
+    f.error.hidden = false;
+  }
+
+  $('#formEditar')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!pedidos.some(p => p.id === editandoId)) return dlg.close();
+
+    const cliente = f.cliente.value.trim();
+    const total = num(f.total.value);
+    const abonado = num(f.abonado.value);
+
+    if (!cliente) return errorModal('Escribe el nombre del cliente.');
+    if (total < 0 || abonado < 0) return errorModal('Los montos no pueden ser negativos.');
+    if (abonado > total) return errorModal('El abonado no puede superar el total a pagar.');
+    if (f.pago.value === 'pagado' && total <= 0) return errorModal('Define un total mayor a 0 para marcar el pedido como pagado.');
+    if (f.pago.value === 'abonado' && !(abonado > 0 && abonado < total)) {
+      return errorModal('Para "Abonado" indica un monto mayor a 0 y menor al total.');
+    }
+
+    try {
+      await API.actualizar(editandoId, {
+        cliente,
+        fechaLimite: f.fecha.value,
+        confeccionista: f.conf.value.trim() || 'Sin asignar',
+        estado: f.estado.value,
+        total,
+        abonado
+      });
+      avisar(`Pedido ${editandoId} actualizado`);
+      dlg.close();
+      await recargar();
+    } catch (err) {
+      console.error(err);
+      errorModal('No se pudo guardar. Intenta de nuevo.');
+    }
+  });
+
+  // ===== Cotizaciones =====
   let rango = 'semana';
   function pintarCotizaciones() {
     const lista = cotizaciones.filter(c => rango === 'todas' || c.rango === rango);
@@ -126,12 +285,15 @@ document.addEventListener('DOMContentLoaded', () => {
       pintarCotizaciones();
     }));
 
-  // Botones del encabezado (mismos ids que usa inventario.html)
+  // ===== Botones del encabezado =====
   $('#exportar')?.addEventListener('click', () => {
-    const cab = ['ID Pedido', 'Cliente', 'Detalle', 'Fecha Límite', 'Confeccionista', 'Estado', 'Saldo'];
-    const filas = pedidos.map(p => [p.id, p.cliente, p.detalle, p.fecha, p.conf, etiquetasEstado[p.estado], p.saldo]);
+    const cab = ['ID Pedido', 'Cliente', 'Detalle', 'Fecha Límite', 'Confeccionista', 'Estado', 'Estado de Pago', 'Total', 'Abonado', 'Saldo'];
+    const filas = pedidos.map(p => [
+      p.id, p.cliente, `${p.uniforme} (x${p.cantidadIntegrantes})`, p.fechaLimite, p.confeccionista,
+      ESTADOS[p.estado], ESTADOS_PAGO[p.estadoPago], p.total, p.abonado, saldoDe(p)
+    ]);
     const csv = [cab, ...filas]
-      .map(f => f.map(v => `"${String(v).replace(/"/g, '""')}"`).join(','))
+      .map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(','))
       .join('\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' }));
@@ -141,7 +303,8 @@ document.addEventListener('DOMContentLoaded', () => {
     avisar('CSV exportado');
   });
 
-  // Botón azul "+ Nuevo Pedido": va limpio a la planilla de detalle
+  // CREATE: "+ Nuevo Pedido" va limpio a la planilla de detalle
+  // (el borrador de la creación rápida es solo un dato temporal de navegador, no va a la BD)
   $('#registrar')?.addEventListener('click', () => {
     localStorage.removeItem(CLAVE_BORRADOR);
     window.location.href = URL_DETALLE_PEDIDO;
@@ -157,21 +320,19 @@ document.addEventListener('DOMContentLoaded', () => {
     avisar('Borrador guardado');
   });
 
-  // Formulario "Creación Rápida: Pedido Personalizado" -> pasa datos a detallePedido.html
+  // Formulario "Creación Rápida" -> pasa datos a detallePedido.html
   $('#formPedido')?.addEventListener('submit', e => {
     e.preventDefault();
     const clienteInput = $('#pedCliente');
     const productoInput = $('#pedProducto');
     const notasInput = $('#pedNotas');
+    const errorEl = $('#pedError');
 
     if (!clienteInput || !clienteInput.value.trim()) {
-      const errorEl = $('#pedError');
       if (errorEl) errorEl.hidden = false;
       clienteInput?.focus();
       return;
     }
-
-    const errorEl = $('#pedError');
     if (errorEl) errorEl.hidden = true;
 
     const borrador = {
@@ -185,6 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = URL_DETALLE_PEDIDO;
   });
 
-  pintarPedidos();
+  recargar();
   pintarCotizaciones();
 });

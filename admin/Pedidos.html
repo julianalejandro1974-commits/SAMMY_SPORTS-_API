@@ -20,7 +20,9 @@
     <!-- CSS propio de pedidos -->
     <link rel="stylesheet" href="css/Pedidos.css">
 
-    <!-- JavaScript propio de pedidos -->
+    <!-- Capa de datos (aquí se conectará la base de datos) y JavaScript propio de pedidos.
+         Con defer se ejecutan en orden: pedidosApi.js SIEMPRE antes que Pedidos.js -->
+    <script src="js/pedidosApi.js" defer></script>
     <script src="js/Pedidos.js" defer></script>
 </head>
 
@@ -149,7 +151,9 @@
                                     <th>Fecha Límite</th>
                                     <th>Confeccionista</th>
                                     <th>Estado</th>
+                                    <th>Pago</th>
                                     <th class="ped-der">Saldo</th>
+                                    <th class="ped-der">Acciones</th>
                                 </tr>
                             </thead>
                             <!-- JavaScript agrega los registros aquí -->
@@ -231,6 +235,65 @@
 
         <!-- Mensajes informativos -->
         <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+
+        <!-- Modal para editar un pedido -->
+        <dialog id="dlgPedido" class="ped-dialogo" aria-labelledby="dlgTitulo">
+            <form id="formEditar" class="ped-form-modal" novalidate>
+                <h2 id="dlgTitulo">Editar pedido <span id="edId"></span></h2>
+
+                <div class="ped-fila">
+                    <div class="ped-campo">
+                        <label for="edCliente">Cliente</label>
+                        <input type="text" id="edCliente" required>
+                    </div>
+                    <div class="ped-campo">
+                        <label for="edFecha">Fecha límite</label>
+                        <input type="date" id="edFecha">
+                    </div>
+                </div>
+
+                <div class="ped-fila">
+                    <div class="ped-campo">
+                        <label for="edConf">Confeccionista</label>
+                        <input type="text" id="edConf" list="listaConf" placeholder="Sin asignar">
+                        <datalist id="listaConf"></datalist>
+                    </div>
+                    <div class="ped-campo">
+                        <label for="edEstado">Estado del pedido</label>
+                        <select id="edEstado"></select>
+                    </div>
+                </div>
+
+                <div class="ped-fila">
+                    <div class="ped-campo">
+                        <label for="edTotal">Total a pagar</label>
+                        <input type="number" id="edTotal" min="0" step="any">
+                    </div>
+                    <div class="ped-campo">
+                        <label for="edAbonado">Abonado</label>
+                        <input type="number" id="edAbonado" min="0" step="any">
+                    </div>
+                </div>
+
+                <div class="ped-fila">
+                    <div class="ped-campo">
+                        <label for="edPago">Estado de pago</label>
+                        <select id="edPago"></select>
+                    </div>
+                    <div class="ped-campo">
+                        <label for="edSaldo">Saldo pendiente</label>
+                        <output id="edSaldo" class="ped-salida">$0</output>
+                    </div>
+                </div>
+
+                <p class="ped-error" id="edError" role="alert" hidden></p>
+
+                <div class="ped-form-acciones">
+                    <button type="button" class="ped-btn ped-btn-suave" id="edCancelar">Cancelar</button>
+                    <button type="submit" class="ped-btn ped-btn-naranja">Guardar cambios</button>
+                </div>
+            </form>
+        </dialog>
 
     </main>
 

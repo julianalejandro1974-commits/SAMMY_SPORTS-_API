@@ -475,3 +475,48 @@ td select {
     padding: 60px 16px 24px;
   }
 }
+
+.resumen-pago {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #f1f3f8;
+  font-size: 13px;
+  color: #1b2333
+}
+
+.resumen-pago strong {
+  font-weight: 700
+}
+
+.badge-pago {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600
+}
+
+.badge-pago.pendiente {
+  background: #fcd5d5;
+  color: #b3261e
+}
+
+.badge-pago.abonado {
+  background: #ffe3d6;
+  color: #b23200
+}
+
+.badge-pago.pagado {
+  background: #d7e4fb;
+  color: #0a35cf
+}
+
+.aviso.error {
+  background: #fcd5d5;
+  color: #8a0000;
+  border-color: #f4b9b9
+}
