@@ -2,7 +2,7 @@
 /* SAMMY SPORTS - CATÁLOGO */
 
 :root {
-    --azul-oscuro: #203147;
+    --azul-oscuro: #1c2c3f;;
     --naranja: #df4300;
     --azul: #0044cc;
     --fondo: #f5f7fc;
@@ -20,24 +20,23 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-/* MENÚ LATERAL */
-
+/* Sidebar */
 .sidebar {
+    width: 250px;
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
-    height: 100vh;
     background: var(--azul-oscuro);
     color: white;
     display: flex;
     flex-direction: column;
-    z-index: 1000;
+    z-index: 1030;
 }
 
 .sidebar-profile {
-    text-align: center;
-    padding: 24px 12px 12px;
+  text-align: center;
+  padding: 1.75rem 1rem 1rem;
 }
 
 .sidebar-profile img {
@@ -45,69 +44,80 @@ body {
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 10px;
+    border: 2px solid #ffffff33;
+    margin-bottom: 0.75rem;
 }
 
 .sidebar-profile h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0;
 }
 
 .sidebar-profile small {
-    color: #a9b9d9;
-    font-size: 12px;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .sidebar-brand {
-    text-align: center;
-    padding: 12px 10px 22px;
+  text-align: center;
+  padding: 0.75rem 1rem 1.5rem;
 }
 
 .sidebar-brand h2 {
-    font-size: 24px;
-    font-weight: 800;
-    line-height: 1.1;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
 }
 
 .sidebar-brand small {
-    font-size: 12px;
-    color: #8996ad;
+    font-size: 0.72rem;
+    color: #7f8aa0;
 }
 
 .sidebar-nav {
-    padding: 0 16px;
-    flex: 1;
+  padding: 0 1rem;
+  flex-grow: 1;
 }
 
 .sidebar a {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 12px 16px;
-    margin-bottom: 5px;
-    border-radius: 8px;
+    gap: 0.85rem;
+    color: #d1d5db;
     text-decoration: none;
-    color: #d5dcec;
-    font-size: 14px;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
     font-weight: 500;
+    margin-bottom: 0.35rem;
+    transition: 0s;
+}
+
+.sidebar a i {
+    font-size: 0.9rem;
+    width: 16px;
 }
 
 .sidebar a:hover {
-    background: #2a3e57;
+    background: #263a52;
     color: white;
 }
 
 .sidebar a.active {
     background: var(--naranja);
     color: white;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .sidebar-footer {
-    padding: 15px;
-    border-top: 1px solid #ffffff20;
+    padding: 1rem;
+    border-top: 1px solid #ffffff14;
 }
+
 
 /* CONTENIDO PRINCIPAL */
 
