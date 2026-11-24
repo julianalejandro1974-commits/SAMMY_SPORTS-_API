@@ -1,0 +1,155 @@
+/* Consumo de Materiales - clases con prefijo con- para no chocar con inventario.css */
+.contenido {
+    --con-linea: #e6e9f0;
+    --con-azul: #0044cc;
+    --con-rojo: #c0201b;
+    --con-suave: #5d6678;
+    --con-fondo: #eef2fb;
+}
+
+.con-azul { color: var(--con-azul); }
+.con-suave { color: var(--con-suave); font-weight: 400; font-size: 11px; }
+.con-der { text-align: right !important; }
+
+.con-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.con-encabezado h1 { font-size: 22px; margin: 0 0 2px; }
+.con-encabezado p { font-size: 13px; color: var(--con-suave); margin: 0; }
+
+.con-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.con-volver { font-size: 13px; font-weight: 600; color: var(--con-suave); text-decoration: none; }
+
+.con-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid var(--con-azul);
+}
+
+.con-btn:hover { filter: brightness(0.93); }
+.con-btn-azul { background: var(--con-azul); color: #fff; width: 100%; }
+.con-btn-claro { background: #fff; color: var(--con-azul); }
+
+.con-card {
+    background: #fff;
+    border: 1px solid var(--con-linea);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 3px #0000000a;
+    min-width: 0;
+}
+
+.con-card h2 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.con-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.con-kpis small { font-size: 12px; color: var(--con-suave); }
+.con-kpis strong { display: block; font-size: 26px; font-weight: 800; color: var(--con-azul); margin-top: 6px; }
+
+.con-layout {
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.con-col { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+
+.con-campo { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.con-campo label { font-size: 12px; font-weight: 600; color: #2c364b; }
+
+.con-campo input,
+.con-campo select,
+.con-head input {
+    font: inherit;
+    font-size: 13px;
+    padding: 9px 10px;
+    border: 1px solid #cfd6e4;
+    border-radius: 6px;
+    background: var(--con-fondo);
+    width: 100%;
+    color: #1b2333;
+}
+
+.con-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
+.con-head h2 { margin: 0; }
+.con-head input { width: auto; }
+
+.con-error { color: var(--con-rojo); font-size: 12px; margin: 0 0 10px; }
+
+.con-enlace {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--con-azul);
+    text-decoration: none;
+}
+
+.con-scroll { overflow-x: auto; }
+.con-tabla { width: 100%; min-width: 520px; border-collapse: collapse; }
+
+.con-tabla th {
+    background: var(--con-fondo);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--con-suave);
+    text-align: left;
+    padding: 10px 12px;
+}
+
+.con-tabla td {
+    padding: 12px;
+    border-top: 1px solid var(--con-linea);
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.con-tabla small { display: block; font-size: 11px; color: var(--con-suave); }
+.con-vacio { text-align: center; color: var(--con-suave); }
+
+.con-borrar { background: none; border: 0; color: var(--con-suave); cursor: pointer; font-size: 14px; }
+.con-borrar:hover { color: var(--con-rojo); }
+
+.con-resumen { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.con-resumen li { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+.con-resumen small { display: block; font-size: 11px; color: var(--con-suave); }
+
+@media (max-width: 1150px) {
+    .con-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 750px) {
+    .con-kpis { grid-template-columns: 1fr; }
+}
+
+@media print {
+    .sidebar, .menu-movil, .con-acciones { display: none !important; }
+    .contenido { margin: 0; padding: 0; }
+}
